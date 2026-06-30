@@ -2142,16 +2142,24 @@
       cards.forEach(c => sIO.observe(c));
     })();
 
-    // video bullets fly-in — works on all devices
+    // video bullets — trigger only when video is scrolled into viewport
     const bulletsEl = document.getElementById('video-bullets');
     if (bulletsEl) {
-      function activateBullets() { bulletsEl.classList.add('bullets-active'); }
-      // fallback: if already in viewport on load (hero is top of page)
-      setTimeout(activateBullets, 400);
+      let bulletsDone = false;
+      function activateBullets() {
+        if (bulletsDone) return;
+        bulletsDone = true;
+        bulletsEl.classList.add('bullets-active');
+      }
       const bullIO = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) { activateBullets(); bullIO.disconnect(); }
       }, { threshold: 0.05 });
       bullIO.observe(bulletsEl);
+      // desktop fallback: fire only if element is already visible on page load
+      setTimeout(function() {
+        const r = bulletsEl.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) activateBullets();
+      }, 400);
     }
 
     // exit-intent popup — desktop (mouseleave) + mobile (visibilitychange/pagehide)
