@@ -381,7 +381,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
       <!-- ── LEFT: Text ── -->
-      <div class="flex flex-col gap-7 order-2 lg:order-1">
+      <div class="flex flex-col gap-7 order-1 lg:order-1">
 
         <!-- eyebrow label -->
         <div class="fade-up delay-1 inline-flex w-fit items-center gap-2 text-xs font-medium tracking-widest uppercase font-inter" style="color:#b0006d; letter-spacing:0.12em">
@@ -458,8 +458,8 @@
 
       </div>
 
-      <!-- ── RIGHT: Photo ── -->
-      <div class="order-1 lg:order-2 flex justify-center lg:justify-end fade-up delay-2">
+      <!-- ── RIGHT: Video ── -->
+      <div class="order-2 lg:order-2 flex justify-center lg:justify-end fade-up delay-2">
         <div class="photo-wrap relative w-[280px] sm:w-[340px] lg:w-full lg:max-w-[420px]" style="position:relative">
 
           <!-- decorative corner lines -->
@@ -483,18 +483,29 @@
             "
           ></video>
 
-          <!-- floating badge — social proof -->
-          <div class="absolute -bottom-5 -left-5 sm:-left-8 flex items-center gap-3 rounded-2xl px-4 py-3 border border-white/10"
-               style="background:rgba(15,15,15,0.85); backdrop-filter:blur(12px); box-shadow:0 8px 32px rgba(0,0,0,0.5)">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(176,0,109,0.15); border:1px solid rgba(176,0,109,0.3)">
-              <svg class="w-4 h-4" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-white font-grotesk font-semibold text-sm leading-tight">+47 проєктів</p>
-              <p class="text-gray-500 font-inter text-xs">запущено</p>
-            </div>
+          <!-- bullets overlay on video -->
+          <div class="absolute bottom-0 left-0 right-0 rounded-b-xl px-4 py-4"
+               style="background:linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
+            <ul class="flex flex-col gap-2">
+              <li class="flex items-center gap-2 font-inter text-xs font-medium text-white">
+                <span class="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(176,0,109,0.25);border:1px solid rgba(176,0,109,0.5);">
+                  <svg class="w-2.5 h-2.5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                Сайт під ключ за <strong class="text-white">3–5&nbsp;днів</strong>
+              </li>
+              <li class="flex items-center gap-2 font-inter text-xs font-medium text-white">
+                <span class="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(176,0,109,0.25);border:1px solid rgba(176,0,109,0.5);">
+                  <svg class="w-2.5 h-2.5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                Авторський дизайн, <strong class="text-white">без шаблонів</strong>
+              </li>
+              <li class="flex items-center gap-2 font-inter text-xs font-medium text-white">
+                <span class="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(176,0,109,0.25);border:1px solid rgba(176,0,109,0.5);">
+                  <svg class="w-2.5 h-2.5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </span>
+                <strong class="text-white">2&nbsp;місяці</strong> технічного супроводу
+              </li>
+            </ul>
           </div>
 
         </div>
@@ -546,20 +557,22 @@
 
           <!-- Цитата Гейтса з лівим бордером -->
           <blockquote class="pl-5" style="border-left:3px solid #b0006d;">
-            <p class="font-grotesk text-xl sm:text-2xl font-bold text-gray-900 leading-snug mb-3">
+            <p class="font-grotesk text-xl sm:text-2xl font-bold text-gray-900 leading-snug mb-4">
               «Якщо вашого бізнесу немає в інтернеті&nbsp;— ви не існуєте в бізнесі»
             </p>
-            <!-- Атрибуція + фото -->
-            <div class="flex items-center gap-3 mt-3">
+            <!-- Фото Гейтса -->
+            <div class="flex items-center gap-4 mt-2">
               <img
-                src="Гейтс.jpg"
+                src="%D0%93%D0%B5%D0%B9%D1%82%D1%81.jpg"
                 alt="Білл Гейтс"
-                class="w-9 h-9 rounded-full object-cover flex-shrink-0"
-                style="border:1.5px solid rgba(176,0,109,0.30);"
+                class="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                style="border:1.5px solid rgba(176,0,109,0.30);box-shadow:0 4px 16px rgba(0,0,0,0.12);"
+                onerror="this.src='Гейтс.jpg'"
               />
-              <cite class="font-inter text-[11px] font-semibold tracking-[0.18em] uppercase not-italic" style="color:#b0006d;">
-                Білл Гейтс
-              </cite>
+              <div>
+                <cite class="font-grotesk text-base font-bold not-italic text-gray-900 block">Білл Гейтс</cite>
+                <span class="font-inter text-xs" style="color:#b0006d;">Співзасновник Microsoft</span>
+              </div>
             </div>
           </blockquote>
 
