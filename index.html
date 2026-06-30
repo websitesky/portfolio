@@ -155,21 +155,20 @@
 
     /* btn-primary gradient + glow pulse */
     @keyframes btn-glow {
-      0%, 100% { filter: drop-shadow(0 0 6px rgba(176,0,109,0.55)); }
-      50%       { filter: drop-shadow(0 0 18px rgba(176,0,109,0.90)); }
+      0%, 100% { box-shadow: 0 0 14px 4px rgba(176,0,109,0.45), 0 4px 15px rgba(0,0,0,0.25); }
+      50%       { box-shadow: 0 0 32px 10px rgba(176,0,109,0.78), 0 4px 20px rgba(0,0,0,0.25); }
     }
     .btn-primary {
       position: relative;
       overflow: hidden;
       background: linear-gradient(135deg, #d4007f 0%, #b0006d 55%, #7a0050 100%) !important;
       animation: btn-glow 2.4s ease-in-out infinite;
-      transition: box-shadow 0.3s, transform 0.2s, filter 0.2s;
+      transition: transform 0.2s;
     }
     .btn-primary:hover {
-      box-shadow: 0 0 36px 8px rgba(176,0,109,0.55);
       transform: translateY(-2px) scale(1.02);
-      filter: brightness(1.15) drop-shadow(0 0 22px rgba(176,0,109,0.90));
-      animation-play-state: paused;
+      box-shadow: 0 0 40px 14px rgba(176,0,109,0.82) !important;
+      animation: none;
     }
     .btn-primary:active {
       transform: translateY(0) scale(0.98);
@@ -470,7 +469,7 @@
         <div class="fade-up delay-4 flex flex-wrap items-center gap-4">
           <a href="#contact"
              class="btn-primary inline-flex items-center gap-2 rounded-full font-inter font-semibold text-sm sm:text-base text-white px-7 py-3.5 no-underline"
-             style="background:#b0006d; box-shadow:0 0 24px 4px rgba(176,0,109,0.40); text-decoration:none">
+             style="text-decoration:none">
             Обговорити проєкт
           </a>
           <a href="#contact"
@@ -725,7 +724,7 @@
         </p>
         <a href="#contact"
            class="btn-primary relative overflow-hidden inline-flex items-center justify-center gap-2 font-inter text-sm font-semibold whitespace-nowrap px-6 py-4 rounded-lg text-white shrink-0 transition-all duration-200"
-           style="background:#b0006d;box-shadow:0 0 24px rgba(176,0,109,0.35);">
+           style="">
           Отримати професійну пораду
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
@@ -917,7 +916,7 @@
                 </ul>
               </div>
               <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-full font-inter font-semibold text-sm text-white py-3 no-underline"
-                 style="background:#b0006d;box-shadow:0 0 20px 3px rgba(176,0,109,0.35);text-decoration:none;">
+                 style="text-decoration:none;">
                 Замовити Landing
               </a>
             </div>
@@ -965,7 +964,7 @@
                 </ul>
               </div>
               <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-full font-inter font-semibold text-sm text-white py-3 no-underline"
-                 style="background:#b0006d;box-shadow:0 0 20px 3px rgba(176,0,109,0.40);text-decoration:none;">
+                 style="text-decoration:none;">
                 Замовити сайт
               </a>
             </div>
@@ -1011,7 +1010,7 @@
                 </ul>
               </div>
               <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-full font-inter font-semibold text-sm text-white py-3 no-underline"
-                 style="background:#b0006d;box-shadow:0 0 20px 3px rgba(176,0,109,0.35);text-decoration:none;">
+                 style="text-decoration:none;">
                 Замовити магазин
               </a>
             </div>
@@ -1049,7 +1048,7 @@
         <!-- CTA -->
         <a href="#contact"
            class="btn-primary inline-flex items-center gap-2 font-inter text-sm font-semibold px-8 py-4 rounded-lg text-white transition-all duration-200"
-           style="background:#b0006d;box-shadow:0 0 24px rgba(176,0,109,0.35);">
+           style="">
           Дізнатися вартість сайту
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
@@ -1172,7 +1171,7 @@
               <!-- CTA button -->
               <a href="#contact"
                  class="btn-primary inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full font-inter font-bold text-base text-white px-10 py-4 no-underline"
-                 style="background:#b0006d;box-shadow:0 0 32px 8px rgba(176,0,109,0.45);text-decoration:none;">
+                 style="text-decoration:none;">
                 Запустити мій сайт
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
               </a>
@@ -1365,7 +1364,7 @@
         </div>
         <a href="#contact"
            class="btn-primary relative overflow-hidden inline-flex items-center justify-center gap-2 font-inter text-sm font-bold whitespace-nowrap px-8 py-4 rounded-xl text-white shrink-0 transition-all duration-200"
-           style="background:#b0006d;box-shadow:0 0 32px rgba(176,0,109,0.50);font-size:1rem;">
+           style="font-size:1rem;">
           Хочу такий проєкт
           <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
@@ -1782,7 +1781,7 @@
           type="button"
           onclick="handleContactSubmit()"
           class="btn-primary relative overflow-hidden w-full font-inter text-sm font-semibold py-4 rounded-lg text-white mt-2 transition-all duration-200 flex items-center justify-center gap-2"
-          style="background:#b0006d;box-shadow:0 0 32px rgba(176,0,109,0.40);">
+          style="">
           Обговорити проєкт
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
@@ -2047,8 +2046,8 @@
     <!-- CTA -->
     <div class="px-6 pb-8 mt-auto">
       <a href="#contact" onclick="closeMobileMenu()"
-         class="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-inter text-sm font-semibold text-white transition-all"
-         style="background:#b0006d;box-shadow:0 0 20px rgba(176,0,109,0.35);">
+         class="btn-primary flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-inter text-sm font-semibold text-white"
+         style="">
         Обговорити проєкт
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
       </a>
@@ -2221,8 +2220,8 @@
 
       <a href="#contact"
          onclick="document.getElementById('exit-popup').classList.remove('show')"
-         class="w-full inline-flex items-center justify-center gap-2 font-inter text-sm font-semibold py-4 rounded-xl text-white transition-all duration-200"
-         style="background:#b0006d;box-shadow:0 0 24px rgba(176,0,109,0.35);">
+         class="btn-primary w-full inline-flex items-center justify-center gap-2 font-inter text-sm font-semibold py-4 rounded-xl text-white"
+         style="">
         Задати запитання
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
