@@ -153,16 +153,23 @@
       pointer-events: none;
     }
 
-    /* btn-primary glow pulse */
+    /* btn-primary gradient + glow pulse */
+    @keyframes btn-glow {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(176,0,109,0.55)); }
+      50%       { filter: drop-shadow(0 0 18px rgba(176,0,109,0.90)); }
+    }
     .btn-primary {
       position: relative;
       overflow: hidden;
+      background: linear-gradient(135deg, #d4007f 0%, #b0006d 55%, #7a0050 100%) !important;
+      animation: btn-glow 2.4s ease-in-out infinite;
       transition: box-shadow 0.3s, transform 0.2s, filter 0.2s;
     }
     .btn-primary:hover {
       box-shadow: 0 0 36px 8px rgba(176,0,109,0.55);
       transform: translateY(-2px) scale(1.02);
-      filter: brightness(1.1);
+      filter: brightness(1.15) drop-shadow(0 0 22px rgba(176,0,109,0.90));
+      animation-play-state: paused;
     }
     .btn-primary:active {
       transform: translateY(0) scale(0.98);
