@@ -2142,24 +2142,19 @@
       cards.forEach(c => sIO.observe(c));
     })();
 
-    // video bullets — fire only when entire video is fully visible in viewport
+    // video bullets — fire as soon as bullet strip enters viewport (before full video visible)
     const bulletsEl = document.getElementById('video-bullets');
     if (bulletsEl) {
       let bulletsDone = false;
-      const videoWrap = bulletsEl.parentElement;
       function activateBullets() {
         if (bulletsDone) return;
         bulletsDone = true;
         bulletsEl.classList.add('bullets-active');
-        window.removeEventListener('scroll', checkVideoVisible);
       }
-      function checkVideoVisible() {
-        const r = videoWrap.getBoundingClientRect();
-        if (r.top >= 0 && r.bottom <= window.innerHeight) activateBullets();
-      }
-      window.addEventListener('scroll', checkVideoVisible, { passive: true });
-      // check immediately in case already fully visible on load (desktop)
-      checkVideoVisible();
+      const bullIO = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) { activateBullets(); bullIO.disconnect(); }
+      }, { threshold: 0.2 });
+      bullIO.observe(bulletsEl);
     }
 
     // exit-intent popup — desktop (mouseleave) + mobile (visibilitychange/pagehide)
