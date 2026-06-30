@@ -327,6 +327,25 @@
     .bullets-active .bullet-item:nth-child(2) { animation: bulletLaunch 0.65s cubic-bezier(0.22,1,0.36,1) 0.75s forwards; }
     .bullets-active .bullet-item:nth-child(3) { animation: bulletLaunch 0.65s cubic-bezier(0.22,1,0.36,1) 1.25s forwards; }
 
+    /* flip-card hint pulse border */
+    @keyframes hintPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(176,0,109,0); border-color: rgba(176,0,109,0.35); }
+      50%       { box-shadow: 0 0 0 4px rgba(176,0,109,0.22); border-color: rgba(176,0,109,0.80); }
+    }
+    .flip-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #ffffff;
+      border: 1px solid rgba(176,0,109,0.35);
+      border-radius: 6px;
+      padding: 3px 10px;
+      animation: hintPulse 2s ease-in-out infinite;
+    }
+
     /* solution cards entrance + hover */
     @keyframes cardRise {
       from { opacity:0; transform:translateY(22px); }
@@ -892,7 +911,7 @@
               </div>
               <div>
                 <p class="font-grotesk text-4xl font-extrabold text-white mb-1">Від <span style="color:#b0006d;">$300</span></p>
-                <p class="font-inter text-xs" style="color:#6b7280;">Натисніть або наведіть для деталей ⤵</p>
+                <span class="flip-hint">Натисніть або наведіть для деталей ⤵</span>
               </div>
             </div>
 
@@ -944,7 +963,7 @@
               </div>
               <div class="relative z-10">
                 <p class="font-grotesk text-4xl font-extrabold text-white mb-1">Від <span style="color:#b0006d;">$600</span></p>
-                <p class="font-inter text-xs" style="color:#6b7280;">Натисніть або наведіть для деталей ⤵</p>
+                <span class="flip-hint">Натисніть або наведіть для деталей ⤵</span>
               </div>
             </div>
 
@@ -989,7 +1008,7 @@
               </div>
               <div>
                 <p class="font-grotesk text-4xl font-extrabold text-white mb-1">Від <span style="color:#b0006d;">$1000</span></p>
-                <p class="font-inter text-xs" style="color:#6b7280;">Натисніть або наведіть для деталей ⤵</p>
+                <span class="flip-hint">Натисніть або наведіть для деталей ⤵</span>
               </div>
             </div>
 
