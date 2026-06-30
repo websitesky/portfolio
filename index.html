@@ -2153,7 +2153,7 @@
       }
       const bullIO = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) { activateBullets(); bullIO.disconnect(); }
-      }, { threshold: 0.2 });
+      }, { threshold: 1.0 });
       bullIO.observe(bulletsEl);
     }
 
