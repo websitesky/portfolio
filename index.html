@@ -309,15 +309,17 @@
     }
     .fab-pulse { animation: fab-pulse 2s ease-out infinite; }
 
-    /* video bullets fly-in */
-    @keyframes bulletFly {
-      from { opacity:0; transform:translateX(-18px); }
-      to   { opacity:1; transform:translateX(0); }
+    /* video bullets — launch from video centre, land at bottom */
+    @keyframes bulletLaunch {
+      0%   { opacity:0; transform:translateY(-90px) scale(0.55); filter:blur(3px); }
+      55%  { opacity:1; filter:blur(0); }
+      75%  { transform:translateY(4px) scale(1.03); }
+      100% { opacity:1; transform:translateY(0) scale(1); filter:blur(0); }
     }
     .bullet-item { opacity:0; }
-    .bullets-active .bullet-item:nth-child(1) { animation: bulletFly 0.5s ease-out 0.2s forwards; }
-    .bullets-active .bullet-item:nth-child(2) { animation: bulletFly 0.5s ease-out 0.7s forwards; }
-    .bullets-active .bullet-item:nth-child(3) { animation: bulletFly 0.5s ease-out 1.2s forwards; }
+    .bullets-active .bullet-item:nth-child(1) { animation: bulletLaunch 0.65s cubic-bezier(0.22,1,0.36,1) 0.25s forwards; }
+    .bullets-active .bullet-item:nth-child(2) { animation: bulletLaunch 0.65s cubic-bezier(0.22,1,0.36,1) 0.75s forwards; }
+    .bullets-active .bullet-item:nth-child(3) { animation: bulletLaunch 0.65s cubic-bezier(0.22,1,0.36,1) 1.25s forwards; }
 
     /* solution cards entrance + hover */
     @keyframes cardRise {
@@ -447,7 +449,7 @@
 
         <!-- H1 -->
         <h1 class="fade-up delay-2 font-grotesk text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.9rem] font-extrabold leading-[1.08] tracking-tight text-white">
-          Сайт, який&nbsp;<span style="color:#b0006d; text-shadow:0 0 28px rgba(176,0,109,0.35)">продає</span>.<br />
+          Сайт, який&nbsp;<span style="color:#b0006d; text-shadow:0 0 28px rgba(176,0,109,0.35)">продає<span style="text-shadow:0 0 32px rgba(176,0,109,0.6)">.</span></span><br />
           А не просто висить<br class="hidden sm:block" /> в інтернеті.
         </h1>
 
