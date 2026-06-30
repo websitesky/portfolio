@@ -1,0 +1,2088 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сайти для бізнесу</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fuchsia: {
+              brand: '#b0006d',
+              glow:  '#c026d3',
+              dim:   '#7a0049',
+            },
+          },
+          fontFamily: {
+            grotesk: ['"Space Grotesk"', 'sans-serif'],
+            inter:   ['Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            glow: '0 0 32px 6px rgba(176,0,109,0.45)',
+            'glow-sm': '0 0 16px 3px rgba(176,0,109,0.30)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* subtle tech grid on background */
+    body {
+      background-color: #0a0a0a;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* noise overlay for premium feel */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* radial accent glow behind hero text */
+    .hero-glow {
+      position: absolute;
+      top: -10%;
+      left: -15%;
+      width: 55%;
+      height: 70%;
+      background: radial-gradient(ellipse, rgba(176,0,109,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      filter: blur(40px);
+    }
+
+    /* nav link hover */
+    .nav-link {
+      position: relative;
+      color: #d1d5db;
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: #b0006d;
+      transition: width 0.25s ease;
+    }
+    .nav-link:hover { color: #b0006d; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* pill badge */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: #d1d5db;
+      white-space: nowrap;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .pill:hover {
+      border-color: rgba(176,0,109,0.4);
+      background: rgba(176,0,109,0.07);
+    }
+
+    /* photo frame glow */
+    .photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 1.25rem;
+      background: linear-gradient(135deg, #b0006d55, #ffffff10, #b0006d33);
+      z-index: -1;
+    }
+
+    /* shimmer sweep animation */
+    @keyframes shimmer {
+      0%   { transform: translateX(-120%) skewX(-15deg); }
+      100% { transform: translateX(220%) skewX(-15deg); }
+    }
+
+    /* gift icon wiggle */
+    @keyframes wiggle {
+      0%,100% { transform: rotate(0deg) scale(1); }
+      25%      { transform: rotate(-14deg) scale(1.15); }
+      50%      { transform: rotate(10deg) scale(1.1); }
+      75%      { transform: rotate(-6deg) scale(1.05); }
+    }
+
+    .gift-icon {
+      display: inline-block;
+      animation: wiggle 2.4s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    /* ripple on click */
+    @keyframes ripple {
+      to { transform: scale(4); opacity: 0; }
+    }
+    .ripple-ring {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transform: scale(0);
+      animation: ripple 0.55s linear;
+      pointer-events: none;
+    }
+
+    /* btn-primary glow pulse */
+    .btn-primary {
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s, transform 0.2s, filter 0.2s;
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 36px 8px rgba(176,0,109,0.55);
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.1);
+    }
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+    /* shimmer sweep on hover */
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transform: translateX(-120%) skewX(-15deg);
+      pointer-events: none;
+    }
+    .btn-primary:hover::before {
+      animation: shimmer 0.6s ease forwards;
+    }
+    /* inner gloss */
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.10), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* btn-outline */
+    .btn-outline {
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+    }
+    .btn-outline:hover {
+      background: rgba(176,0,109,0.12);
+      border-color: #b0006d;
+      color: #f0d0e8;
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 18px 3px rgba(176,0,109,0.22);
+    }
+    .btn-outline:active {
+      transform: translateY(0) scale(0.98);
+    }
+    .btn-outline::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(176,0,109,0.15), transparent);
+      transform: translateX(-120%) skewX(-15deg);
+      pointer-events: none;
+    }
+    .btn-outline:hover::before {
+      animation: shimmer 0.6s ease forwards;
+    }
+
+    /* nav btn */
+    .nav-cta {
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      background: #b0006d;
+      color: #fff;
+      box-shadow: 0 0 16px 3px rgba(176,0,109,0.35);
+    }
+
+    /* scroll reveal — simple fade-in via CSS animation */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s ease both; }
+    .delay-1 { animation-delay: 0.10s; }
+    .delay-2 { animation-delay: 0.20s; }
+    .delay-3 { animation-delay: 0.35s; }
+    .delay-4 { animation-delay: 0.50s; }
+    .delay-5 { animation-delay: 0.65s; }
+
+    /* IntersectionObserver reveal for block 2+ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* problem card hover lift */
+    .problem-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .problem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      border-color: rgba(176,0,109,0.30) !important;
+    }
+
+    /* portfolio case card hover */
+    .case-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .case-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(176,0,109,0.30) !important;
+      box-shadow: 0 20px 48px rgba(0,0,0,0.5);
+    }
+
+    /* solution card hover */
+    .solution-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(176,0,109,0.28) !important;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+    }
+
+    /* ── 3D Flip Cards ── */
+    .flip-wrapper { position: relative; cursor: pointer; }
+
+    /* desktop: hover flips */
+    @media (hover: hover) and (pointer: fine) {
+      .flip-wrapper:hover .flip-inner {
+        transform: rotateY(180deg);
+      }
+      .flip-wrapper:hover .flip-front {
+        pointer-events: none;
+      }
+    }
+
+    /* mobile / touch: .flipped class flips */
+    .flip-wrapper.flipped .flip-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-wrapper.flipped .flip-front {
+      pointer-events: none;
+    }
+
+    /* FAB pulse ring */
+    @keyframes fab-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(176,0,109,0.55), 0 0 16px rgba(176,0,109,0.30); }
+      70%  { box-shadow: 0 0 0 12px rgba(176,0,109,0), 0 0 16px rgba(176,0,109,0.30); }
+      100% { box-shadow: 0 0 0 0 rgba(176,0,109,0),   0 0 16px rgba(176,0,109,0.30); }
+    }
+    .fab-pulse {
+      animation: fab-pulse 2s ease-out infinite;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen text-white overflow-x-hidden relative z-0">
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────────────── -->
+  <header class="relative z-20 w-full border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-md sticky top-0">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between gap-6">
+
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 font-grotesk font-700 text-white no-underline" style="font-weight:700; text-decoration:none">
+        <span class="w-5 h-5 rounded-sm flex-shrink-0" style="background:#b0006d; box-shadow:0 0 10px 2px rgba(176,0,109,0.55);"></span>
+        <span class="text-[15px] tracking-tight">сайти для бізнесу</span>
+      </a>
+
+      <!-- Nav links (hidden on mobile) -->
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="#price"     class="nav-link text-sm font-inter font-medium">Послуги та Ціни</a>
+        <a href="#portfolio" class="nav-link text-sm font-inter font-medium">Портфоліо</a>
+        <a href="#about"     class="nav-link text-sm font-inter font-medium">Про мене</a>
+        <a href="#process"   class="nav-link text-sm font-inter font-medium">Процес</a>
+        <a href="#faq"       class="nav-link text-sm font-inter font-medium">Запитання</a>
+      </nav>
+
+      <!-- Social icons in header -->
+      <div class="hidden md:flex items-center gap-2">
+        <a href="#" aria-label="Telegram"
+           class="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
+           style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);"
+           onmouseover="this.style.background='rgba(176,0,109,0.18)';this.style.borderColor='rgba(176,0,109,0.45)';"
+           onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(255,255,255,0.08)';">
+          <svg class="w-4 h-4" style="color:#9ca3af;" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram"
+           class="w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-200"
+           style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);"
+           onmouseover="this.style.background='rgba(176,0,109,0.18)';this.style.borderColor='rgba(176,0,109,0.45)';"
+           onmouseout="this.style.background='rgba(255,255,255,0.04)';this.style.borderColor='rgba(255,255,255,0.08)';">
+          <svg class="w-4 h-4" style="color:#9ca3af;" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- CTA button -->
+      <a href="#contact" class="nav-cta hidden sm:inline-flex items-center gap-1.5 text-sm font-medium border border-white/20 text-gray-300 rounded-full px-5 py-2 font-inter no-underline" style="text-decoration:none">
+        Порахувати вартість сайту&nbsp;<span class="text-base leading-none" style="color:#b0006d">→</span>
+      </a>
+
+      <!-- Mobile burger -->
+      <button onclick="openMobileMenu()" class="md:hidden p-2 rounded-md border border-white/10 text-gray-400 hover:text-white hover:border-white/20 transition-all" aria-label="Відкрити меню">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ─── HERO ──────────────────────────────────────────────────────── -->
+  <main class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-24 lg:pt-24 lg:pb-32">
+
+    <!-- background glow -->
+    <div class="hero-glow"></div>
+
+    <!-- 2-column grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      <!-- ── LEFT: Text ── -->
+      <div class="flex flex-col gap-7 order-2 lg:order-1">
+
+        <!-- eyebrow label -->
+        <div class="fade-up delay-1 inline-flex w-fit items-center gap-2 text-xs font-medium tracking-widest uppercase font-inter" style="color:#b0006d; letter-spacing:0.12em">
+          <span class="w-6 h-px" style="background:#b0006d; opacity:0.7"></span>
+          Веб-розробка для бізнесу
+          <span class="w-6 h-px" style="background:#b0006d; opacity:0.7"></span>
+        </div>
+
+        <!-- H1 -->
+        <h1 class="fade-up delay-2 font-grotesk text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-[3.9rem] font-extrabold leading-[1.08] tracking-tight text-white">
+          Сайт, який&nbsp;<span style="color:#b0006d; text-shadow:0 0 28px rgba(176,0,109,0.35)">продає</span>.<br />
+          А не просто висить<br class="hidden sm:block" /> в інтернеті.
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="fade-up delay-3 font-inter text-base sm:text-lg leading-relaxed max-w-[480px]" style="color:#9ca3af">
+          Створюю сучасні сайти під ключ для локального бізнесу&nbsp;—
+          щоб клієнти&nbsp;<span class="text-gray-300 font-medium">писали вам</span>, а не гортали конкурентів.
+        </p>
+
+        <!-- Buttons -->
+        <div class="fade-up delay-4 flex flex-wrap items-center gap-4">
+          <a href="#contact"
+             class="btn-primary inline-flex items-center gap-2 rounded-full font-inter font-semibold text-sm sm:text-base text-white px-7 py-3.5 no-underline"
+             style="background:#b0006d; box-shadow:0 0 24px 4px rgba(176,0,109,0.40); text-decoration:none">
+            Обговорити проєкт
+          </a>
+          <a href="#contact"
+             class="btn-outline inline-flex items-center gap-2 rounded-full font-inter font-medium text-sm sm:text-base text-gray-300 border border-white/20 px-7 py-3.5 no-underline"
+             style="text-decoration:none">
+            Отримати перший екран у&nbsp;<span class="gift-icon" title="подарунок">🎁</span>
+          </a>
+        </div>
+
+        <!-- Pills -->
+        <div class="fade-up delay-5 flex flex-wrap gap-2.5 mt-1">
+          <span class="pill">
+            <svg class="w-3 h-3 flex-shrink-0" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            від ідеї до&nbsp;<strong class="text-white font-semibold">перших продажів</strong>
+          </span>
+          <span class="pill">
+            <svg class="w-3 h-3 flex-shrink-0" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l2 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <strong class="text-white font-semibold">3-5&nbsp;днів</strong>&nbsp;до запуску
+          </span>
+          <span class="pill">
+            <svg class="w-3 h-3 flex-shrink-0" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/>
+            </svg>
+            <strong class="text-white font-semibold">100%</strong>&nbsp;адаптив
+          </span>
+          <span class="pill">
+            <svg class="w-3 h-3 flex-shrink-0" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+            </svg>
+            Авторський дизайн без шаблонів
+          </span>
+          <span class="pill">
+            <svg class="w-3 h-3 flex-shrink-0" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+            </svg>
+            Технічна підтримка після здачі
+          </span>
+          <span class="pill">
+            <svg class="w-3 h-3 flex-shrink-0" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+            </svg>
+            Wow-ефект, що тримає увагу
+          </span>
+        </div>
+
+      </div>
+
+      <!-- ── RIGHT: Photo ── -->
+      <div class="order-1 lg:order-2 flex justify-center lg:justify-end fade-up delay-2">
+        <div class="photo-wrap relative w-[280px] sm:w-[340px] lg:w-full lg:max-w-[420px]" style="position:relative">
+
+          <!-- decorative corner lines -->
+          <div class="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 rounded-tl-lg" style="border-color:#b0006d; opacity:0.7"></div>
+          <div class="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 rounded-br-lg" style="border-color:#b0006d; opacity:0.7"></div>
+
+          <!-- dot accent -->
+          <div class="absolute -top-1 -right-1 w-3 h-3 rounded-full" style="background:#b0006d; box-shadow:0 0 12px 3px rgba(176,0,109,0.6)"></div>
+
+          <video
+            src="video.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            class="w-full rounded-xl object-cover"
+            style="
+              aspect-ratio: 3/4;
+              border: 1px solid rgba(255,255,255,0.08);
+              box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(176,0,109,0.15);
+            "
+          ></video>
+
+          <!-- floating badge — social proof -->
+          <div class="absolute -bottom-5 -left-5 sm:-left-8 flex items-center gap-3 rounded-2xl px-4 py-3 border border-white/10"
+               style="background:rgba(15,15,15,0.85); backdrop-filter:blur(12px); box-shadow:0 8px 32px rgba(0,0,0,0.5)">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(176,0,109,0.15); border:1px solid rgba(176,0,109,0.3)">
+              <svg class="w-4 h-4" style="color:#b0006d" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-white font-grotesk font-semibold text-sm leading-tight">+47 проєктів</p>
+              <p class="text-gray-500 font-inter text-xs">запущено</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /grid -->
+  </main>
+
+  <!-- ─── SCROLL INDICATOR ──────────────────────────────────────────── -->
+  <div class="relative z-10 flex justify-center pb-10">
+    <div class="flex flex-col items-center gap-2 opacity-30 hover:opacity-60 transition-opacity cursor-pointer">
+      <span class="font-inter text-xs text-gray-500 tracking-widest uppercase">scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-gray-600 to-transparent"></div>
+    </div>
+  </div>
+
+  <!-- ─── BLOCK 2: Цінність + Проблеми ──────────────────────────────── -->
+  <section id="why" class="relative overflow-hidden" style="background:#ffffff;">
+
+    <!-- ── PART 1: Метафора власності ── -->
+    <div class="max-w-6xl mx-auto px-6 lg:px-10 pt-20 lg:pt-28 pb-16">
+
+      <div class="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-10 lg:gap-20 items-start">
+
+        <!-- Ліва колонка: лейбл + H2 -->
+        <div class="reveal">
+          <p class="font-inter text-xs font-semibold tracking-[0.18em] uppercase mb-4" style="color:#b0006d;">
+            Основа довіри
+          </p>
+          <h2 class="font-grotesk text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold leading-[1.1] tracking-tight text-gray-900">
+            Чому вашому бізнесу потрібен сайт?
+          </h2>
+        </div>
+
+        <!-- Права колонка: текст + цитата -->
+        <div class="reveal flex flex-col gap-7">
+
+          <!-- Абзац -->
+          <p class="font-inter text-base sm:text-[17px] leading-relaxed text-gray-500">
+            Вести бізнес лише в соцмережах (Instagram, TikTok) — це як будувати дім на орендованій ділянці.
+            Алгоритми платформ змінюються, а сторінки блокують без попереджень. Ви ризикуєте втратити все.
+          </p>
+          <p class="font-inter text-base sm:text-[17px] leading-relaxed font-semibold text-gray-900">
+            Сайт — це ваш фундамент.
+          </p>
+          <p class="font-inter text-base sm:text-[17px] leading-relaxed font-bold" style="color:#b0006d;">
+            Це ваша приватна власність, яка гарантує стабільність бізнесу в інтернеті.
+          </p>
+
+          <!-- Цитата Гейтса з лівим бордером -->
+          <blockquote class="pl-5" style="border-left:3px solid #b0006d;">
+            <p class="font-grotesk text-xl sm:text-2xl font-bold text-gray-900 leading-snug mb-3">
+              «Якщо вашого бізнесу немає в інтернеті&nbsp;— ви не існуєте в бізнесі»
+            </p>
+            <!-- Атрибуція + фото -->
+            <div class="flex items-center gap-3 mt-3">
+              <img
+                src="Гейтс.jpg"
+                alt="Білл Гейтс"
+                class="w-9 h-9 rounded-full object-cover flex-shrink-0"
+                style="border:1.5px solid rgba(176,0,109,0.30);"
+              />
+              <cite class="font-inter text-[11px] font-semibold tracking-[0.18em] uppercase not-italic" style="color:#b0006d;">
+                Білл Гейтс
+              </cite>
+            </div>
+          </blockquote>
+
+        </div>
+      </div>
+
+    </div><!-- /part1 -->
+
+    <!-- separator -->
+    <div class="w-full h-px max-w-7xl mx-auto" style="background:linear-gradient(90deg,transparent,#e5e7eb,transparent);"></div>
+
+    <!-- ── PART 2: Problem cards ── -->
+    <div style="background:#111111;" class="relative">
+
+      <!-- wave -->
+      <div class="absolute top-0 left-0 right-0 overflow-hidden" style="height:56px; transform:translateY(-1px); pointer-events:none;">
+        <svg viewBox="0 0 1440 56" preserveAspectRatio="none" class="w-full h-full">
+          <path d="M0,0 C480,56 960,56 1440,0 L1440,0 L0,0 Z" fill="#ffffff"/>
+        </svg>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-20">
+
+        <!-- heading -->
+        <div class="text-center mb-10">
+          <p class="reveal font-inter text-sm font-medium tracking-[0.18em] uppercase mb-2" style="color:#b0006d;">— знайомо?</p>
+          <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+            Сайт є. Продажів немає.
+          </h2>
+        </div>
+
+        <!-- 4 cards — один горизонтальний рядок -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
+
+          <!-- 01 -->
+          <div class="problem-card reveal group relative rounded-xl p-6 overflow-hidden"
+               style="background:#1a1a1a; border:1px solid rgba(255,255,255,0.07);">
+            <div class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0"
+                 style="border:1.5px solid rgba(176,0,109,0.45);">
+              <svg class="w-3 h-3" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </div>
+            <p class="font-inter text-[11px] font-bold tracking-[0.18em] mb-4 pr-8" style="color:#b0006d;">//&nbsp;01</p>
+            <p class="font-inter text-[14px] leading-relaxed text-gray-400 pr-2">
+              Сайт існує лише <strong class="text-white">«для галочки»</strong>, але клієнти не дзвонять і не залишають заявки.
+            </p>
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+                 style="background:radial-gradient(ellipse at 0% 0%, rgba(176,0,109,0.09) 0%, transparent 70%);"></div>
+          </div>
+
+          <!-- 02 -->
+          <div class="problem-card reveal group relative rounded-xl p-6 overflow-hidden"
+               style="background:#1a1a1a; border:1px solid rgba(255,255,255,0.07);">
+            <div class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0"
+                 style="border:1.5px solid rgba(176,0,109,0.45);">
+              <svg class="w-3 h-3" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </div>
+            <p class="font-inter text-[11px] font-bold tracking-[0.18em] mb-4 pr-8" style="color:#b0006d;">//&nbsp;02</p>
+            <p class="font-inter text-[14px] leading-relaxed text-gray-400 pr-2">
+              Конкуренти виглядають <strong class="text-white">надійніше та сучасніше</strong>, тому клієнт обирає їх.
+            </p>
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+                 style="background:radial-gradient(ellipse at 0% 0%, rgba(176,0,109,0.09) 0%, transparent 70%);"></div>
+          </div>
+
+          <!-- 03 -->
+          <div class="problem-card reveal group relative rounded-xl p-6 overflow-hidden"
+               style="background:#1a1a1a; border:1px solid rgba(255,255,255,0.07);">
+            <div class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0"
+                 style="border:1.5px solid rgba(176,0,109,0.45);">
+              <svg class="w-3 h-3" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </div>
+            <p class="font-inter text-[11px] font-bold tracking-[0.18em] mb-4 pr-8" style="color:#b0006d;">//&nbsp;03</p>
+            <p class="font-inter text-[14px] leading-relaxed text-gray-400 pr-2">
+              Сторінка <strong class="text-white">криво відображається на смартфонах</strong>&nbsp;— 80% мобільних користувачів просто йдуть.
+            </p>
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+                 style="background:radial-gradient(ellipse at 0% 0%, rgba(176,0,109,0.09) 0%, transparent 70%);"></div>
+          </div>
+
+          <!-- 04 -->
+          <div class="problem-card reveal group relative rounded-xl p-6 overflow-hidden"
+               style="background:#1a1a1a; border:1px solid rgba(255,255,255,0.07);">
+            <div class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full flex-shrink-0"
+                 style="border:1.5px solid rgba(176,0,109,0.45);">
+              <svg class="w-3 h-3" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </div>
+            <p class="font-inter text-[11px] font-bold tracking-[0.18em] mb-4 pr-8" style="color:#b0006d;">//&nbsp;04</p>
+            <p class="font-inter text-[14px] leading-relaxed text-gray-400 pr-2">
+              Незрозуміло, скільки коштують послуги та де реальні кейси&nbsp;— <strong class="text-white">клієнт закриває вкладку</strong>.
+            </p>
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+                 style="background:radial-gradient(ellipse at 0% 0%, rgba(176,0,109,0.09) 0%, transparent 70%);"></div>
+          </div>
+
+        </div><!-- /cards -->
+
+        <!-- ── PART 3: Summary ── -->
+        <div class="reveal text-center max-w-2xl mx-auto">
+          <div class="w-10 h-px mx-auto mb-6" style="background:#b0006d; opacity:0.4;"></div>
+          <p class="font-inter text-base sm:text-lg leading-relaxed text-gray-400">
+            <strong style="color:#b0006d;">Я створюю сайти</strong>, які вирішують ці проблеми,
+            <strong style="color:#b0006d;">перетворюючи відвідувачів на ваших реальних клієнтів</strong>.
+          </p>
+        </div>
+
+      </div>
+    </div><!-- /part2+3 -->
+
+  </section>
+
+  <!-- ─── CTA 1 ──────────────────────────────────────────────────── -->
+  <section style="background:#0a0a0a;" class="relative overflow-hidden">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-14 flex justify-center">
+      <div class="reveal w-full max-w-2xl rounded-2xl px-8 sm:px-12 py-10 flex flex-col sm:flex-row sm:items-center gap-7"
+           style="background:#0f0f0f;border:1px solid rgba(176,0,109,0.25);box-shadow:0 0 60px rgba(176,0,109,0.06);">
+        <p class="font-inter text-base sm:text-lg leading-relaxed flex-1" style="color:#d1d5db;">
+          Впізнали свій сайт у цих пунктах або лише плануєте перший запуск? <strong class="text-white">Давайте обговоримо</strong>, як створити інструмент, який приноситиме вам реальні продажі.
+        </p>
+        <a href="#contact"
+           class="btn-primary relative overflow-hidden inline-flex items-center justify-center gap-2 font-inter text-sm font-semibold whitespace-nowrap px-6 py-4 rounded-lg text-white shrink-0 transition-all duration-200"
+           style="background:#b0006d;box-shadow:0 0 24px rgba(176,0,109,0.35);">
+          Отримати професійну пораду
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BLOCK 3: Рішення ──────────────────────────────────────────── -->
+  <section id="solution" style="background:#141414; background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px); background-size:44px 44px;">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24">
+
+      <!-- heading block -->
+      <div class="mb-14">
+        <p class="reveal font-inter text-xs font-semibold tracking-[0.20em] uppercase mb-4" style="color:#b0006d;">
+          — Рішення
+        </p>
+        <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-[3rem] font-extrabold text-white leading-[1.1] tracking-tight max-w-xl">
+          Сайт, який працює як інструмент продажу
+        </h2>
+      </div>
+
+      <!-- 6 cards: 3×2 grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <!-- 1: Довіра -->
+        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
+          <!-- dot accent top-right -->
+          <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
+          <!-- icon -->
+          <div class="mb-5">
+            <svg class="w-7 h-7" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+            </svg>
+          </div>
+          <h3 class="font-grotesk text-base font-bold text-white mb-2">Довіра</h3>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Фото робіт, відгуки, гарантії — все, що знімає сумніви клієнта</p>
+          <!-- hover glow -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+               style="background:radial-gradient(ellipse at 0% 100%, rgba(176,0,109,0.08) 0%, transparent 65%);"></div>
+        </div>
+
+        <!-- 2: Заявка в 1 клік -->
+        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
+          <div class="mb-5">
+            <svg class="w-7 h-7" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/>
+            </svg>
+          </div>
+          <h3 class="font-grotesk text-base font-bold text-white mb-2">Заявка в 1 клік</h3>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Форма та дзвінок завжди на видному місці</p>
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+               style="background:radial-gradient(ellipse at 0% 100%, rgba(176,0,109,0.08) 0%, transparent 65%);"></div>
+        </div>
+
+        <!-- 3: Адаптивність -->
+        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
+          <div class="mb-5">
+            <svg class="w-7 h-7" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5H3m0-15h18M3 7.5h18M3 12h18m-7.5 7.5h7.5M15 19.5v-3m0 0h-4.5m4.5 0V12"/>
+            </svg>
+          </div>
+          <h3 class="font-grotesk text-base font-bold text-white mb-2">Адаптивність</h3>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Однаково добре виглядає з телефону і з комп'ютера</p>
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+               style="background:radial-gradient(ellipse at 0% 100%, rgba(176,0,109,0.08) 0%, transparent 65%);"></div>
+        </div>
+
+        <!-- 4: Швидкість -->
+        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
+          <div class="mb-5">
+            <svg class="w-7 h-7" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+            </svg>
+          </div>
+          <h3 class="font-grotesk text-base font-bold text-white mb-2">Швидкість</h3>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Сайт відкривається миттєво — ніхто не чекає</p>
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+               style="background:radial-gradient(ellipse at 0% 100%, rgba(176,0,109,0.08) 0%, transparent 65%);"></div>
+        </div>
+
+        <!-- 5: Карта і локація -->
+        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
+          <div class="mb-5">
+            <svg class="w-7 h-7" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-grotesk text-base font-bold text-white mb-2">Карта і локація</h3>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Google Maps та контакти — клієнту легко вас знайти</p>
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+               style="background:radial-gradient(ellipse at 0% 100%, rgba(176,0,109,0.08) 0%, transparent 65%);"></div>
+        </div>
+
+        <!-- 6: SEO під локацію -->
+        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
+          <div class="mb-5">
+            <svg class="w-7 h-7" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803 7.5 7.5 0 0016.803 15.803z"/>
+            </svg>
+          </div>
+          <h3 class="font-grotesk text-base font-bold text-white mb-2">SEO під локацію</h3>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Налаштування під запити типу «послуга + місто»</p>
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"
+               style="background:radial-gradient(ellipse at 0% 100%, rgba(176,0,109,0.08) 0%, transparent 65%);"></div>
+        </div>
+
+      </div><!-- /grid -->
+    </div>
+  </section>
+
+  <!-- ─── BLOCK 4: Послуги та Ціни (3D Flip Cards) ─────────────────── -->
+  <section id="price" style="background:#0a0a0a;" class="relative overflow-hidden">
+
+    <!-- subtle grid -->
+    <div class="absolute inset-0 pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:48px 48px;"></div>
+
+    <!-- glow backdrop -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none" style="background:radial-gradient(ellipse,rgba(176,0,109,0.10) 0%,transparent 70%);filter:blur(40px);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-28">
+
+      <!-- heading -->
+      <div class="text-center mb-14">
+        <p class="reveal font-inter text-xs font-semibold tracking-[0.20em] uppercase mb-4" style="color:#b0006d;">— Послуги та Ціни</p>
+        <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+          Який сайт потрібен<br class="hidden sm:block"/> вашому бізнесу?
+        </h2>
+      </div>
+
+      <!-- cards grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- ── Card 1: Landing Page ── -->
+        <div class="flip-wrapper reveal" style="height:500px;perspective:1200px;" data-flip="false">
+          <div class="flip-inner" style="position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(.4,0,.2,1);">
+
+            <!-- FRONT -->
+            <div class="flip-front absolute inset-0 rounded-2xl flex flex-col justify-between p-7 overflow-hidden"
+                 style="backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#111111;border:1px solid rgba(176,0,109,0.30);">
+              <!-- top glow dot -->
+              <div class="absolute top-5 right-5 w-2 h-2 rounded-full" style="background:#b0006d;box-shadow:0 0 8px 2px rgba(176,0,109,0.6);"></div>
+              <!-- corner accent lines -->
+              <div class="absolute top-0 left-0 w-8 h-8 border-t border-l rounded-tl-2xl" style="border-color:rgba(176,0,109,0.4);"></div>
+              <div class="absolute bottom-0 right-0 w-8 h-8 border-b border-r rounded-br-2xl" style="border-color:rgba(176,0,109,0.4);"></div>
+
+              <div>
+                <!-- tag -->
+                <span class="inline-block font-inter text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full mb-5" style="color:#b0006d;background:rgba(176,0,109,0.10);border:1px solid rgba(176,0,109,0.25);">Односторінник</span>
+                <h3 class="font-grotesk text-2xl font-extrabold text-white mb-3">Landing Page</h3>
+                <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Ідеально для продажу однієї послуги, курсу або збору лідів з реклами.</p>
+              </div>
+              <div>
+                <p class="font-grotesk text-4xl font-extrabold text-white mb-1">Від <span style="color:#b0006d;">$300</span></p>
+                <p class="font-inter text-xs" style="color:#6b7280;">Натисніть або наведіть для деталей ⤵</p>
+              </div>
+            </div>
+
+            <!-- BACK -->
+            <div class="flip-back absolute inset-0 rounded-2xl flex flex-col justify-between p-7 overflow-hidden"
+                 style="backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:linear-gradient(135deg,#1a0010 0%,#0f0f0f 60%,#1a0010 100%);border:1px solid rgba(176,0,109,0.45);">
+              <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(176,0,109,0.15) 0%,transparent 60%);"></div>
+              <div class="relative z-10">
+                <h3 class="font-grotesk text-base font-bold text-white mb-3">Що входить:</h3>
+                <ul class="space-y-1.5">
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Аналіз конкурентів</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Продаюча структура сайту</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Індивідуальний дизайн</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Адаптивність: мобільна, планшет, десктоп</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Базова SEO-оптимізація</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Підключення домена</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Підключення контактних форм, месенджерів і соцмереж</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Технічний супровід 1 місяць</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#b0006d;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Ціна — за сторінку до 7 екранів (блоків)</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Технічні сторінки (політика, оферта, подяка, 404)</li>
+                </ul>
+              </div>
+              <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-full font-inter font-semibold text-sm text-white py-3 no-underline"
+                 style="background:#b0006d;box-shadow:0 0 20px 3px rgba(176,0,109,0.35);text-decoration:none;">
+                Замовити Landing
+              </a>
+            </div>
+          </div>
+        </div><!-- /card1 -->
+
+        <!-- ── Card 2: Багатосторінковий (popular) ── -->
+        <div class="flip-wrapper reveal" style="height:500px;perspective:1200px;" data-flip="false">
+          <!-- popular badge -->
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full font-inter text-xs font-bold tracking-widest uppercase text-white" style="background:#b0006d;box-shadow:0 0 16px 3px rgba(176,0,109,0.5);">Популярний</div>
+          <div class="flip-inner" style="position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(.4,0,.2,1);">
+
+            <!-- FRONT -->
+            <div class="flip-front absolute inset-0 rounded-2xl flex flex-col justify-between p-7 overflow-hidden"
+                 style="backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#111111;border:2px solid #b0006d;">
+              <div class="absolute top-5 right-5 w-2 h-2 rounded-full" style="background:#b0006d;box-shadow:0 0 8px 2px rgba(176,0,109,0.6);"></div>
+              <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 rounded-tl-2xl" style="border-color:#b0006d;"></div>
+              <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 rounded-br-2xl" style="border-color:#b0006d;"></div>
+              <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background:radial-gradient(ellipse at top left,rgba(176,0,109,0.07) 0%,transparent 55%);"></div>
+
+              <div class="relative z-10">
+                <span class="inline-block font-inter text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full mb-5" style="color:#b0006d;background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.35);">Для компаній</span>
+                <h3 class="font-grotesk text-2xl font-extrabold text-white mb-3">Багатосторінковий сайт</h3>
+                <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Для компаній, клінік, салонів, які хочуть детально презентувати себе.</p>
+              </div>
+              <div class="relative z-10">
+                <p class="font-grotesk text-4xl font-extrabold text-white mb-1">Від <span style="color:#b0006d;">$600</span></p>
+                <p class="font-inter text-xs" style="color:#6b7280;">Натисніть або наведіть для деталей ⤵</p>
+              </div>
+            </div>
+
+            <!-- BACK -->
+            <div class="flip-back absolute inset-0 rounded-2xl flex flex-col justify-between p-7 overflow-hidden"
+                 style="backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:linear-gradient(135deg,#1a0010 0%,#0f0f0f 60%,#1a0010 100%);border:2px solid #b0006d;">
+              <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(176,0,109,0.18) 0%,transparent 60%);"></div>
+              <div class="relative z-10">
+                <h3 class="font-grotesk text-base font-bold text-white mb-3">Що входить:</h3>
+                <ul class="space-y-1.5">
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Все з Landing Page</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>До 5–10 сторінок</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Складна навігація</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Інтеграція блогу</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Базова SEO-оптимізація</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Супровід 1 місяць</li>
+                </ul>
+              </div>
+              <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-full font-inter font-semibold text-sm text-white py-3 no-underline"
+                 style="background:#b0006d;box-shadow:0 0 20px 3px rgba(176,0,109,0.40);text-decoration:none;">
+                Замовити сайт
+              </a>
+            </div>
+          </div>
+        </div><!-- /card2 -->
+
+        <!-- ── Card 3: E-commerce ── -->
+        <div class="flip-wrapper reveal" style="height:500px;perspective:1200px;" data-flip="false">
+          <div class="flip-inner" style="position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 0.7s cubic-bezier(.4,0,.2,1);">
+
+            <!-- FRONT -->
+            <div class="flip-front absolute inset-0 rounded-2xl flex flex-col justify-between p-7 overflow-hidden"
+                 style="backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#111111;border:1px solid rgba(176,0,109,0.30);">
+              <div class="absolute top-5 right-5 w-2 h-2 rounded-full" style="background:#b0006d;box-shadow:0 0 8px 2px rgba(176,0,109,0.6);"></div>
+              <div class="absolute top-0 left-0 w-8 h-8 border-t border-l rounded-tl-2xl" style="border-color:rgba(176,0,109,0.4);"></div>
+              <div class="absolute bottom-0 right-0 w-8 h-8 border-b border-r rounded-br-2xl" style="border-color:rgba(176,0,109,0.4);"></div>
+
+              <div>
+                <span class="inline-block font-inter text-[11px] font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full mb-5" style="color:#b0006d;background:rgba(176,0,109,0.10);border:1px solid rgba(176,0,109,0.25);">Інтернет-магазин</span>
+                <h3 class="font-grotesk text-2xl font-extrabold text-white mb-3">E-commerce</h3>
+                <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Для повноцінного продажу товарів онлайн з автоматизацією процесів.</p>
+              </div>
+              <div>
+                <p class="font-grotesk text-4xl font-extrabold text-white mb-1">Від <span style="color:#b0006d;">$1000</span></p>
+                <p class="font-inter text-xs" style="color:#6b7280;">Натисніть або наведіть для деталей ⤵</p>
+              </div>
+            </div>
+
+            <!-- BACK -->
+            <div class="flip-back absolute inset-0 rounded-2xl flex flex-col justify-between p-7 overflow-hidden"
+                 style="backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);background:linear-gradient(135deg,#1a0010 0%,#0f0f0f 60%,#1a0010 100%);border:1px solid rgba(176,0,109,0.45);">
+              <div class="absolute inset-0 rounded-2xl pointer-events-none" style="background:radial-gradient(ellipse at top right,rgba(176,0,109,0.15) 0%,transparent 60%);"></div>
+              <div class="relative z-10">
+                <h3 class="font-grotesk text-base font-bold text-white mb-3">Що входить:</h3>
+                <ul class="space-y-1.5">
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Багатосторінковий сайт</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Адаптивність: мобільна, планшет, десктоп</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Підключення домену</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Підключення контактних форм, месенджерів і соцмереж</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Підключення онлайн-оплат та методів доставок</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Налаштування: кошик, фільтри, категорії, каталог, картки товарів</li>
+                  <li class="flex items-start gap-2 font-inter text-xs leading-snug" style="color:#d1d5db;"><span class="mt-0.5 w-3.5 h-3.5 flex-shrink-0 rounded-full flex items-center justify-center" style="background:rgba(176,0,109,0.22);"><svg class="w-2 h-2" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></span>Супровід 1 місяць</li>
+                </ul>
+              </div>
+              <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-full font-inter font-semibold text-sm text-white py-3 no-underline"
+                 style="background:#b0006d;box-shadow:0 0 20px 3px rgba(176,0,109,0.35);text-decoration:none;">
+                Замовити магазин
+              </a>
+            </div>
+          </div>
+        </div><!-- /card3 -->
+
+      </div><!-- /grid -->
+    </div>
+  </section>
+
+  <!-- ─── BLOCK 4.5: Точна вартість ──────────────────────────────── -->
+  <section style="background:#0a0a0a;" class="relative overflow-hidden">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-16 flex justify-center">
+
+      <!-- container -->
+      <div class="reveal w-full max-w-2xl rounded-2xl px-8 sm:px-12 py-10 sm:py-14 flex flex-col items-center text-center gap-6"
+           style="border:1px solid rgba(176,0,109,0.35);background:linear-gradient(135deg,rgba(176,0,109,0.06) 0%,rgba(10,10,10,0) 60%),#0f0f0f;box-shadow:0 0 60px rgba(176,0,109,0.07),0 1px 0 rgba(255,255,255,0.04) inset;">
+
+        <!-- eyebrow -->
+        <p class="font-inter text-xs font-semibold tracking-[0.20em] uppercase" style="color:#b0006d;">— Вартість проєкту</p>
+
+        <!-- heading -->
+        <h2 class="font-grotesk text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+          Точна вартість вашого проєкту
+        </h2>
+
+        <!-- divider -->
+        <div class="w-12 h-px" style="background:#b0006d;opacity:0.6;"></div>
+
+        <!-- body text -->
+        <p class="font-inter text-base sm:text-lg leading-relaxed max-w-xl" style="color:#9ca3af;">
+          Фінальна ціна залежить від складності функціонала, кількості сторінок та інтеграцій. Щоб ви не переплачували за зайве, я рахую вартість індивідуально після короткого зідзвону або заповнення брифу. Це дає нам обом чітке розуміння масштабу роботи та точні терміни запуску.
+        </p>
+
+        <!-- CTA -->
+        <a href="#contact"
+           class="btn-primary inline-flex items-center gap-2 font-inter text-sm font-semibold px-8 py-4 rounded-lg text-white transition-all duration-200"
+           style="background:#b0006d;box-shadow:0 0 24px rgba(176,0,109,0.35);">
+          Дізнатися вартість сайту
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BLOCK 5: Як ми працюємо (Timeline) ─────────────────────── -->
+  <section id="process" style="background:#0a0a0a;" class="relative overflow-hidden">
+
+    <!-- ambient glow top-right -->
+    <div class="absolute top-0 right-0 w-96 h-96 pointer-events-none" style="background:radial-gradient(circle,rgba(176,0,109,0.07) 0%,transparent 70%);filter:blur(48px);"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto px-6 lg:px-8 pt-20 pb-28">
+
+      <!-- heading -->
+      <div class="text-center mb-16">
+        <p class="reveal font-inter text-xs font-semibold tracking-[0.20em] uppercase mb-4" style="color:#b0006d;">— Як ми працюємо</p>
+        <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+          Від ідеї до запуску<br class="hidden sm:block"/> вашого сайту
+        </h2>
+      </div>
+
+      <!-- timeline wrapper -->
+      <div class="relative">
+
+        <!-- vertical line SVG -->
+        <svg class="absolute pointer-events-none" style="left:23px;top:24px;bottom:0;width:2px;"
+             aria-hidden="true" preserveAspectRatio="none">
+          <line x1="1" y1="0" x2="1" y2="100%" stroke="url(#lineGrad)" stroke-width="2"/>
+          <defs>
+            <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+              <stop offset="0%" stop-color="#b0006d" stop-opacity="1"/>
+              <stop offset="85%" stop-color="#b0006d" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#b0006d" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <div class="space-y-6">
+
+          <!-- ── STEP 1: Лід-магніт (виділений) ── -->
+          <div class="reveal relative flex gap-5 sm:gap-7">
+            <!-- circle marker -->
+            <div class="flex-shrink-0 relative z-10 w-12 h-12 rounded-full flex items-center justify-center font-grotesk text-xs font-extrabold"
+                 style="background:#0a0a0a;border:2px solid #b0006d;color:#b0006d;box-shadow:0 0 16px 4px rgba(176,0,109,0.35);">01</div>
+            <!-- card -->
+            <div class="flex-1 rounded-2xl p-6 sm:p-7 relative overflow-hidden"
+                 style="background:#16040d;border:1.5px solid #b0006d;box-shadow:0 0 32px 6px rgba(176,0,109,0.18);">
+              <!-- glow corner -->
+              <div class="absolute -top-8 -right-8 w-32 h-32 pointer-events-none rounded-full" style="background:radial-gradient(circle,rgba(176,0,109,0.20) 0%,transparent 70%);"></div>
+              <!-- badge -->
+              <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase px-3 py-1 rounded-full mb-4 font-inter"
+                    style="color:#b0006d;background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.30);">
+                🎁 Безкоштовно
+              </span>
+              <h3 class="font-grotesk text-lg sm:text-xl font-bold text-white mb-2 relative z-10">
+                Бриф + Перший екран безкоштовно за 1 день
+              </h3>
+              <p class="font-inter text-sm leading-relaxed relative z-10" style="color:#9ca3af;">
+                Ми обговорюємо ваш проект, і я створюю концепт головного екрану без передоплати. Ви бачите результат перш ніж прийняти рішення про подальшу роботу.
+              </p>
+            </div>
+          </div>
+
+          <!-- ── STEP 2 ── -->
+          <div class="reveal relative flex gap-5 sm:gap-7">
+            <div class="flex-shrink-0 relative z-10 w-12 h-12 rounded-full flex items-center justify-center font-grotesk text-xs font-extrabold"
+                 style="background:#0a0a0a;border:1.5px solid rgba(176,0,109,0.45);color:#b0006d;">02</div>
+            <div class="flex-1 rounded-2xl p-6 sm:p-7"
+                 style="background:#111111;border:1px solid rgba(255,255,255,0.06);">
+              <h3 class="font-grotesk text-lg sm:text-xl font-bold text-white mb-2">Розробка структури та прототипу</h3>
+              <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">
+                Продумую логіку сайту так, щоб клієнт проходив шлях від першого кліку до покупки.
+              </p>
+            </div>
+          </div>
+
+          <!-- ── STEP 3 ── -->
+          <div class="reveal relative flex gap-5 sm:gap-7">
+            <div class="flex-shrink-0 relative z-10 w-12 h-12 rounded-full flex items-center justify-center font-grotesk text-xs font-extrabold"
+                 style="background:#0a0a0a;border:1.5px solid rgba(176,0,109,0.45);color:#b0006d;">03</div>
+            <div class="flex-1 rounded-2xl p-6 sm:p-7"
+                 style="background:#111111;border:1px solid rgba(255,255,255,0.06);">
+              <h3 class="font-grotesk text-lg sm:text-xl font-bold text-white mb-2">Створення авторського дизайну</h3>
+              <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">
+                Розробляю унікальний візуал, який підкреслює ваш бренд та виділяє вас серед конкурентів.
+              </p>
+            </div>
+          </div>
+
+          <!-- ── STEP 4 ── -->
+          <div class="reveal relative flex gap-5 sm:gap-7">
+            <div class="flex-shrink-0 relative z-10 w-12 h-12 rounded-full flex items-center justify-center font-grotesk text-xs font-extrabold"
+                 style="background:#0a0a0a;border:1.5px solid rgba(176,0,109,0.45);color:#b0006d;">04</div>
+            <div class="flex-1 rounded-2xl p-6 sm:p-7"
+                 style="background:#111111;border:1px solid rgba(255,255,255,0.06);">
+              <h3 class="font-grotesk text-lg sm:text-xl font-bold text-white mb-2">Технічна розробка та адаптив</h3>
+              <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">
+                Верстка сайту з ідеальною адаптацією під будь-які смартфони, планшети та ПК.
+              </p>
+            </div>
+          </div>
+
+          <!-- ── STEP 5: Фінал ── -->
+          <div class="reveal relative flex gap-5 sm:gap-7">
+            <div class="flex-shrink-0 relative z-10 w-12 h-12 rounded-full flex items-center justify-center font-grotesk text-xs font-extrabold"
+                 style="background:#b0006d;border:2px solid #b0006d;color:#fff;box-shadow:0 0 20px 4px rgba(176,0,109,0.45);">05</div>
+            <div class="flex-1">
+              <div class="rounded-2xl p-6 sm:p-7 mb-6"
+                   style="background:#111111;border:1px solid rgba(176,0,109,0.25);">
+                <h3 class="font-grotesk text-lg sm:text-xl font-bold text-white mb-2">Запуск проекту</h3>
+                <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">
+                  Підключення домену, тестування всіх форм, передача сайту вам. Ваш бізнес в мережі 24/7.
+                </p>
+              </div>
+              <!-- CTA button -->
+              <a href="#contact"
+                 class="btn-primary inline-flex items-center justify-center gap-2 w-full sm:w-auto rounded-full font-inter font-bold text-base text-white px-10 py-4 no-underline"
+                 style="background:#b0006d;box-shadow:0 0 32px 8px rgba(176,0,109,0.45);text-decoration:none;">
+                Запустити мій сайт
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+              </a>
+            </div>
+          </div>
+
+        </div><!-- /space-y-6 -->
+      </div><!-- /timeline -->
+    </div>
+  </section>
+
+  <!-- ─── BLOCK 6: Портфоліо ──────────────────────────────────────── -->
+  <section id="portfolio" style="background:#0a0a0a;" class="relative overflow-hidden">
+
+    <!-- subtle grid bg -->
+    <div class="absolute inset-0 pointer-events-none" style="background-image:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);background-size:48px 48px;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-28">
+
+      <!-- heading -->
+      <div class="text-center mb-14">
+        <p class="reveal font-inter text-xs font-semibold tracking-[0.20em] uppercase mb-4" style="color:#b0006d;">— Портфоліо</p>
+        <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-3">
+          Ваш бізнес може виглядати так
+        </h2>
+        <p class="reveal font-inter text-sm font-semibold tracking-[0.18em]" style="color:#b0006d;">// реальні проєкти для реального бізнесу</p>
+      </div>
+
+      <!-- 2×2 grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-7">
+
+        <!-- ── Case 1: LUX ── -->
+        <div class="case-card reveal group rounded-2xl overflow-hidden flex flex-col"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <!-- image zone -->
+          <a href="https://websitesky.github.io/massage/" target="_blank" rel="noopener" class="relative overflow-hidden block" style="aspect-ratio:16/10;">
+            <img src="case-lux.png"
+                 alt="LUX Beauty Center"
+                 class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"/>
+            <!-- fuchsia overlay -->
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                 style="background:rgba(176,0,109,0.55);backdrop-filter:blur(2px);">
+              <span class="font-grotesk text-white font-bold text-lg tracking-wide flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                Переглянути проєкт
+              </span>
+            </div>
+            <!-- case number badge -->
+            <div class="absolute top-4 left-4 font-inter text-[11px] font-bold tracking-[0.15em] px-2.5 py-1 rounded-full" style="background:rgba(176,0,109,0.20);border:1px solid rgba(176,0,109,0.40);color:#b0006d;">// 01</div>
+          </a>
+          <!-- content -->
+          <div class="p-6 flex flex-col flex-1 gap-4">
+            <h3 class="font-grotesk text-lg font-extrabold text-white leading-snug">Преміум-центр краси та тіла LUX</h3>
+            <div class="space-y-3 flex-1">
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Задача</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Онлайн-представництво, яке транслює преміальність та ексклюзивність послуг для залучення платоспроможних клієнтів.</p>
+              </div>
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Рішення</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Елегантна типографіка, м'які пастельні кольори, інтеграція онлайн-запису та детальний прайс-лист.</p>
+              </div>
+            </div>
+            <a href="https://websitesky.github.io/massage/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-inter text-sm font-semibold transition-colors duration-200 mt-auto w-fit" style="color:#b0006d;" onmouseover="this.style.color='#e05aab'" onmouseout="this.style.color='#b0006d'">
+              Переглянути сайт <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- ── Case 2: Клінінг ── -->
+        <div class="case-card reveal group rounded-2xl overflow-hidden flex flex-col"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <a href="https://nchc1.weblium.site/" target="_blank" rel="noopener" class="relative overflow-hidden block" style="aspect-ratio:16/10;">
+            <img src="case-cleaning.png"
+                 alt="Eco Cleaning"
+                 class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"/>
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                 style="background:rgba(176,0,109,0.55);backdrop-filter:blur(2px);">
+              <span class="font-grotesk text-white font-bold text-lg tracking-wide flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                Переглянути проєкт
+              </span>
+            </div>
+            <div class="absolute top-4 left-4 font-inter text-[11px] font-bold tracking-[0.15em] px-2.5 py-1 rounded-full" style="background:rgba(176,0,109,0.20);border:1px solid rgba(176,0,109,0.40);color:#b0006d;">// 02</div>
+          </a>
+          <div class="p-6 flex flex-col flex-1 gap-4">
+            <h3 class="font-grotesk text-lg font-extrabold text-white leading-snug">Екологічне прибирання квартир та офісів</h3>
+            <div class="space-y-3 flex-1">
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Задача</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Побудувати довіру до сервісу та забезпечити максимально швидкий шлях від заходу на сайт до замовлення.</p>
+              </div>
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Рішення</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Акцент на оффері «за 1 годину», блок гарантій та страхування речей, зручна форма вибору послуг.</p>
+              </div>
+            </div>
+            <a href="https://nchc1.weblium.site/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-inter text-sm font-semibold transition-colors duration-200 mt-auto w-fit" style="color:#b0006d;" onmouseover="this.style.color='#e05aab'" onmouseout="this.style.color='#b0006d'">
+              Переглянути сайт <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- ── Case 3: SunPower ── -->
+        <div class="case-card reveal group rounded-2xl overflow-hidden flex flex-col"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <a href="https://websitesky.github.io/sun_batterias/" target="_blank" rel="noopener" class="relative overflow-hidden block" style="aspect-ratio:16/10;">
+            <img src="case-sunpower.png"
+                 alt="SunPower Solar"
+                 class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"/>
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                 style="background:rgba(176,0,109,0.55);backdrop-filter:blur(2px);">
+              <span class="font-grotesk text-white font-bold text-lg tracking-wide flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                Переглянути проєкт
+              </span>
+            </div>
+            <div class="absolute top-4 left-4 font-inter text-[11px] font-bold tracking-[0.15em] px-2.5 py-1 rounded-full" style="background:rgba(176,0,109,0.20);border:1px solid rgba(176,0,109,0.40);color:#b0006d;">// 03</div>
+          </a>
+          <div class="p-6 flex flex-col flex-1 gap-4">
+            <h3 class="font-grotesk text-lg font-extrabold text-white leading-snug">Автономні сонячні станції SunPower</h3>
+            <div class="space-y-3 flex-1">
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Задача</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Презентувати складний технічний продукт, обґрунтувати вигоду інвестицій та збирати ліди на прорахунок вартості.</p>
+              </div>
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Рішення</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Промисловий надійний дизайн, технічні характеристики, калькулятор окупності та форма консультації.</p>
+              </div>
+            </div>
+            <a href="https://websitesky.github.io/sun_batterias/" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 font-inter text-sm font-semibold transition-colors duration-200 mt-auto w-fit" style="color:#b0006d;" onmouseover="this.style.color='#e05aab'" onmouseout="this.style.color='#b0006d'">
+              Переглянути сайт <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- ── Case 4: Hotel ── -->
+        <div class="case-card reveal group rounded-2xl overflow-hidden flex flex-col"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <div class="relative overflow-hidden" style="aspect-ratio:16/10;">
+            <img src="case-hotel.png"
+                 alt="Maison Solara Cannes"
+                 class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                 style="object-position: left center;"/>
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                 style="background:rgba(176,0,109,0.55);backdrop-filter:blur(2px);">
+              <span class="font-grotesk text-white font-bold text-lg tracking-wide flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                Переглянути проєкт
+              </span>
+            </div>
+            <div class="absolute top-4 left-4 font-inter text-[11px] font-bold tracking-[0.15em] px-2.5 py-1 rounded-full" style="background:rgba(176,0,109,0.20);border:1px solid rgba(176,0,109,0.40);color:#b0006d;">// 04</div>
+          </div>
+          <div class="p-6 flex flex-col flex-1 gap-4">
+            <h3 class="font-grotesk text-lg font-extrabold text-white leading-snug">Maison Solara Cannes — Готель</h3>
+            <div class="space-y-3 flex-1">
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Задача</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Передати атмосферу розкоші Лазурного берега та забезпечити прямі бронювання без посередників.</p>
+              </div>
+              <div>
+                <span class="font-inter text-[11px] font-semibold tracking-[0.12em] uppercase" style="color:#b0006d;">Рішення</span>
+                <p class="font-inter text-sm leading-relaxed mt-1" style="color:#9ca3af;">Повноформатні атмосферні фото, мінімалістична навігація, інтеграція календаря бронювання та галерея послуг.</p>
+              </div>
+            </div>
+            <a href="#" class="inline-flex items-center gap-1.5 font-inter text-sm font-semibold transition-colors duration-200 mt-auto w-fit" style="color:#b0006d;" onmouseover="this.style.color='#e05aab'" onmouseout="this.style.color='#b0006d'">
+              Переглянути сайт <span>→</span>
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
+    </div>
+  </section>
+
+  <!-- ─── CTA 2 ──────────────────────────────────────────────────── -->
+  <section style="background:#0a0a0a;" class="relative overflow-hidden">
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-14 flex justify-center">
+      <div class="reveal w-full max-w-2xl rounded-2xl px-8 sm:px-12 py-10 flex flex-col sm:flex-row sm:items-center gap-7"
+           style="background:#0f0f0f;border:1px solid rgba(176,0,109,0.25);box-shadow:0 0 60px rgba(176,0,109,0.06);">
+        <p class="font-inter text-base sm:text-lg leading-relaxed flex-1" style="color:#d1d5db;">
+          Вам сподобались ці проєкти? Я можу розробити <strong class="text-white">концепт сайту для вашої ніші</strong> за аналогічним принципом — щоб ви одразу побачили, як виглядатиме ваш бізнес в мережі.
+        </p>
+        <a href="#contact"
+           class="btn-primary relative overflow-hidden inline-flex items-center justify-center gap-2 font-inter text-sm font-semibold whitespace-nowrap px-6 py-4 rounded-lg text-white shrink-0 transition-all duration-200"
+           style="background:#b0006d;box-shadow:0 0 24px rgba(176,0,109,0.35);">
+          Хочу проєкт як у портфоліо
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BLOCK 7: Чому варто працювати зі мною ───────────────────── -->
+  <section id="about" style="background:#0a0a0a;" class="relative overflow-hidden">
+
+    <!-- glow left -->
+    <div class="absolute -left-32 top-1/3 w-96 h-96 pointer-events-none" style="background:radial-gradient(circle,rgba(176,0,109,0.08) 0%,transparent 70%);filter:blur(48px);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-28">
+
+      <!-- H2 -->
+      <p class="reveal font-inter text-xs font-semibold tracking-[0.20em] uppercase text-center mb-4" style="color:#b0006d;">— Про мене</p>
+      <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight text-center mb-16">
+        Професійна розробка: від концепції<br class="hidden sm:block"/> до стабільного запуску.
+      </h2>
+
+      <!-- ── 2-col: Photo + Bio ── -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-20">
+
+        <!-- Photo -->
+        <div class="reveal relative flex justify-center lg:justify-start">
+          <div class="relative" style="max-width:420px;width:100%;">
+            <!-- corner accents -->
+            <div class="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 rounded-tl-lg" style="border-color:#b0006d;opacity:0.7;"></div>
+            <div class="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 rounded-br-lg" style="border-color:#b0006d;opacity:0.7;"></div>
+            <div class="absolute -top-1 -right-1 w-3 h-3 rounded-full" style="background:#b0006d;box-shadow:0 0 10px 3px rgba(176,0,109,0.6);"></div>
+            <img src="me.png" alt="Любов Скиба"
+                 class="w-full rounded-xl object-cover"
+                 style="aspect-ratio:3/4;border:1px solid rgba(255,255,255,0.08);box-shadow:0 24px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(176,0,109,0.15);"/>
+          </div>
+        </div>
+
+        <!-- Bio -->
+        <div class="reveal flex flex-col gap-6">
+          <!-- eyebrow -->
+          <div class="inline-flex w-fit items-center gap-2 text-xs font-medium tracking-[0.14em] uppercase font-inter" style="color:#b0006d;">
+            <span class="w-5 h-px" style="background:#b0006d;"></span>
+            Розробник сайтів
+          </div>
+          <div>
+            <h3 class="font-grotesk text-3xl sm:text-4xl font-extrabold text-white mb-1">Любов Скиба</h3>
+            <p class="font-inter text-base font-medium" style="color:#b0006d;">Розробник сайтів, які продають.</p>
+          </div>
+          <p class="font-inter text-base sm:text-lg leading-relaxed" style="color:#9ca3af;">
+            Я особисто веду кожен проект від А до Я: від аналізу вашої ідеї до <strong class="text-white">технічного запуску та налаштування сайту</strong>. Працюю без посередників, тому ви отримуєте прозорий процес, стабільний технічний результат і <strong class="text-white">підтримку на всіх етапах розробки</strong>.
+          </p>
+          <!-- guarantees row -->
+          <div class="grid grid-cols-3 gap-3 pt-2">
+
+            <!-- 1: Швидкість -->
+            <div class="flex flex-col items-center text-center gap-2 rounded-xl p-4"
+                 style="background:rgba(176,0,109,0.07);border:1px solid rgba(176,0,109,0.18);">
+              <svg class="w-6 h-6 shrink-0" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <p class="font-grotesk text-xl font-extrabold" style="color:#b0006d;">3–5</p>
+              <p class="font-inter text-xs leading-tight text-white">днів до результату</p>
+            </div>
+
+            <!-- 2: Підтримка -->
+            <div class="flex flex-col items-center text-center gap-2 rounded-xl p-4"
+                 style="background:rgba(176,0,109,0.07);border:1px solid rgba(176,0,109,0.18);">
+              <svg class="w-6 h-6 shrink-0" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+              </svg>
+              <p class="font-grotesk text-xl font-extrabold" style="color:#b0006d;">2 міс.</p>
+              <p class="font-inter text-xs leading-tight text-white">технічний супровід</p>
+            </div>
+
+            <!-- 3: Особиста -->
+            <div class="flex flex-col items-center text-center gap-2 rounded-xl p-4"
+                 style="background:rgba(176,0,109,0.07);border:1px solid rgba(176,0,109,0.18);">
+              <svg class="w-6 h-6 shrink-0" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+              </svg>
+              <p class="font-grotesk text-xl font-extrabold" style="color:#b0006d;">100%</p>
+              <p class="font-inter text-xs leading-tight text-white">особиста робота</p>
+            </div>
+
+          </div>
+        </div>
+      </div><!-- /2col -->
+
+      <!-- ── 6 переваг: 2×3 grid ── -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- 1: Швидкий запуск -->
+        <div class="reveal advantage-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" style="background:radial-gradient(ellipse at 0% 0%,rgba(176,0,109,0.08) 0%,transparent 65%);"></div>
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.25);">
+            <svg class="w-5 h-5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
+            </svg>
+          </div>
+          <h4 class="font-grotesk text-base font-bold text-white mb-2">Швидкий запуск</h4>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Готовий сайт за 3–5 днів, без розтягнутих на місяці погоджень.</p>
+        </div>
+
+        <!-- 2: Дорогий вигляд -->
+        <div class="reveal advantage-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" style="background:radial-gradient(ellipse at 0% 0%,rgba(176,0,109,0.08) 0%,transparent 65%);"></div>
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.25);">
+            <svg class="w-5 h-5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
+            </svg>
+          </div>
+          <h4 class="font-grotesk text-base font-bold text-white mb-2">Дорогий вигляд</h4>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Сучасний дизайн, який викликає довіру до вашого бренду з першого екрана.</p>
+        </div>
+
+        <!-- 3: Повний адаптив -->
+        <div class="reveal advantage-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" style="background:radial-gradient(ellipse at 0% 0%,rgba(176,0,109,0.08) 0%,transparent 65%);"></div>
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.25);">
+            <svg class="w-5 h-5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 8.25h3"/>
+            </svg>
+          </div>
+          <h4 class="font-grotesk text-base font-bold text-white mb-2">Повний адаптив</h4>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Сайт ідеально виглядає на телефонах, планшетах і великих екранах.</p>
+        </div>
+
+        <!-- 4: Заявки в Telegram -->
+        <div class="reveal advantage-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" style="background:radial-gradient(ellipse at 0% 0%,rgba(176,0,109,0.08) 0%,transparent 65%);"></div>
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.25);">
+            <svg class="w-5 h-5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"/>
+            </svg>
+          </div>
+          <h4 class="font-grotesk text-base font-bold text-white mb-2">Заявки в Telegram і таблицю</h4>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Кожна заявка миттєво потрапляє вам у Telegram та Google-таблицю — жоден клієнт не загубиться.</p>
+        </div>
+
+        <!-- 5: Підтримка після старту -->
+        <div class="reveal advantage-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" style="background:radial-gradient(ellipse at 0% 0%,rgba(176,0,109,0.08) 0%,transparent 65%);"></div>
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.25);">
+            <svg class="w-5 h-5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+            </svg>
+          </div>
+          <h4 class="font-grotesk text-base font-bold text-white mb-2">Підтримка після старту</h4>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Допомагаю з першими кроками після запуску та забезпечую стабільну роботу сайту.</p>
+        </div>
+
+        <!-- 6: Особиста комунікація -->
+        <div class="reveal advantage-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+             style="background:#111111;border:1px solid rgba(255,255,255,0.07);">
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" style="background:radial-gradient(ellipse at 0% 0%,rgba(176,0,109,0.08) 0%,transparent 65%);"></div>
+          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.25);">
+            <svg class="w-5 h-5" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+            </svg>
+          </div>
+          <h4 class="font-grotesk text-base font-bold text-white mb-2">Особиста комунікація</h4>
+          <p class="font-inter text-sm leading-relaxed" style="color:#9ca3af;">Ви спілкуєтеся напряму зі мною — жодних менеджерів, лише пряма робота на результат.</p>
+        </div>
+
+      </div><!-- /6 переваг -->
+    </div>
+  </section>
+
+  <!-- ─── BLOCK 8: FAQ ───────────────────────────────────────────── -->
+  <section id="faq" style="background:#0a0a0a;" class="relative overflow-hidden">
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-24">
+
+      <!-- header -->
+      <div class="text-center mb-14">
+        <p class="reveal font-inter text-xs font-semibold tracking-[0.20em] uppercase mb-4" style="color:#b0006d;">— FAQ</p>
+        <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+          Найпоширеніші запитання
+        </h2>
+      </div>
+
+      <!-- accordion list -->
+      <div class="reveal max-w-3xl mx-auto flex flex-col" id="faq-list">
+
+        <!-- item 1 -->
+        <div class="faq-item border-b" style="border-color:rgba(176,0,109,0.20);">
+          <button onclick="faqToggle(this)"
+                  class="w-full flex items-center justify-between gap-4 py-5 text-left focus:outline-none group">
+            <span class="font-grotesk text-base sm:text-lg font-semibold text-white group-hover:opacity-80 transition-opacity">
+              Чи можна вносити правки в процесі роботи?
+            </span>
+            <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+          <div class="faq-body overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+            <p class="font-inter text-sm sm:text-base leading-relaxed pb-5" style="color:#9ca3af;">
+              Так, ми працюємо поетапно. На кожному етапі ви бачите результат, і ми вносимо коригування, щоб кінцевий продукт на 100% відповідав вашим очікуванням.
+            </p>
+          </div>
+        </div>
+
+        <!-- item 2 -->
+        <div class="faq-item border-b" style="border-color:rgba(176,0,109,0.20);">
+          <button onclick="faqToggle(this)"
+                  class="w-full flex items-center justify-between gap-4 py-5 text-left focus:outline-none group">
+            <span class="font-grotesk text-base sm:text-lg font-semibold text-white group-hover:opacity-80 transition-opacity">
+              Що потрібно від мене для старту?
+            </span>
+            <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+          <div class="faq-body overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+            <p class="font-inter text-sm sm:text-base leading-relaxed pb-5" style="color:#9ca3af;">
+              Достатньо короткого брифу або зідзвону на 15 хвилин, де ми обговоримо цілі вашого бізнесу. Всю технічну роботу я беру на себе.
+            </p>
+          </div>
+        </div>
+
+        <!-- item 3 -->
+        <div class="faq-item border-b" style="border-color:rgba(176,0,109,0.20);">
+          <button onclick="faqToggle(this)"
+                  class="w-full flex items-center justify-between gap-4 py-5 text-left focus:outline-none group">
+            <span class="font-grotesk text-base sm:text-lg font-semibold text-white group-hover:opacity-80 transition-opacity">
+              Чи допомагаєте ви з технічною підтримкою після здачі?
+            </span>
+            <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+          <div class="faq-body overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+            <p class="font-inter text-sm sm:text-base leading-relaxed pb-5" style="color:#9ca3af;">
+              Так, я надаю 2 місяці безкоштовного технічного супроводу, щоб ви були спокійні за стабільну роботу вашого сайту.
+            </p>
+          </div>
+        </div>
+
+        <!-- item 4 -->
+        <div class="faq-item border-b" style="border-color:rgba(176,0,109,0.20);">
+          <button onclick="faqToggle(this)"
+                  class="w-full flex items-center justify-between gap-4 py-5 text-left focus:outline-none group">
+            <span class="font-grotesk text-base sm:text-lg font-semibold text-white group-hover:opacity-80 transition-opacity">
+              Чому не можна дізнатися ціну одразу?
+            </span>
+            <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+          <div class="faq-body overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+            <p class="font-inter text-sm sm:text-base leading-relaxed pb-5" style="color:#9ca3af;">
+              Кожен проєкт унікальний. Кількість сторінок, складність функціонала та інтеграцій впливають на обсяг роботи. Зідзвон допомагає мені прорахувати для вас оптимальний бюджет без переплат за зайве.
+            </p>
+          </div>
+        </div>
+
+        <!-- item 5 -->
+        <div class="faq-item border-b" style="border-color:rgba(176,0,109,0.20);">
+          <button onclick="faqToggle(this)"
+                  class="w-full flex items-center justify-between gap-4 py-5 text-left focus:outline-none group">
+            <span class="font-grotesk text-base sm:text-lg font-semibold text-white group-hover:opacity-80 transition-opacity">
+              Чи потрібно мені готувати тексти та фото для сайту?
+            </span>
+            <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+          <div class="faq-body overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+            <p class="font-inter text-sm sm:text-base leading-relaxed pb-5" style="color:#9ca3af;">
+              Ми можемо обговорити це індивідуально. Якщо у вас немає готових матеріалів, я підкажу, як їх підготувати, або ми включимо створення контенту в обсяг робіт, що вплине на підсумкову вартість.
+            </p>
+          </div>
+        </div>
+
+        <!-- item 6 -->
+        <div class="faq-item border-b" style="border-color:rgba(176,0,109,0.20);">
+          <button onclick="faqToggle(this)"
+                  class="w-full flex items-center justify-between gap-4 py-5 text-left focus:outline-none group">
+            <span class="font-grotesk text-base sm:text-lg font-semibold text-white group-hover:opacity-80 transition-opacity">
+              Яка схема оплати та чи є розтермінування?
+            </span>
+            <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+          <div class="faq-body overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+            <p class="font-inter text-sm sm:text-base leading-relaxed pb-5" style="color:#9ca3af;">
+              Стандартна схема: 50% передоплати на початку роботи та 50% після фінального здавання сайту. Можливість розтермінування обговорюється індивідуально залежно від загальної вартості проєкту.
+            </p>
+          </div>
+        </div>
+
+        <!-- item 7 -->
+        <div class="faq-item">
+          <button onclick="faqToggle(this)"
+                  class="w-full flex items-center justify-between gap-4 py-5 text-left focus:outline-none group">
+            <span class="font-grotesk text-base sm:text-lg font-semibold text-white group-hover:opacity-80 transition-opacity">
+              Чи буде мій сайт відображатися на смартфонах?
+            </span>
+            <svg class="faq-icon w-5 h-5 shrink-0 transition-transform duration-300" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
+            </svg>
+          </button>
+          <div class="faq-body overflow-hidden max-h-0 transition-all duration-300 ease-in-out">
+            <p class="font-inter text-sm sm:text-base leading-relaxed pb-5" style="color:#9ca3af;">
+              Безумовно. Усі мої сайти мають сучасну мобільну адаптацію, оскільки зараз понад 80% клієнтів приходять саме зі смартфонів.
+            </p>
+          </div>
+        </div>
+
+      </div><!-- /faq-list -->
+    </div>
+  </section>
+
+  <script>
+    function faqToggle(btn) {
+      const item = btn.closest('.faq-item');
+      const body = item.querySelector('.faq-body');
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+
+      // close all
+      document.querySelectorAll('.faq-item').forEach(el => {
+        el.querySelector('.faq-body').style.maxHeight = '0px';
+        el.querySelector('.faq-icon').style.transform = 'rotate(0deg)';
+      });
+
+      // open clicked if was closed
+      if (!isOpen) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        icon.style.transform = 'rotate(45deg)';
+      }
+    }
+  </script>
+
+  <!-- ─── BLOCK 9: Контактна форма ─────────────────────────────── -->
+  <section id="contact" style="background:#0a0a0a;" class="relative overflow-hidden">
+
+    <!-- glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none" style="background:radial-gradient(ellipse,rgba(176,0,109,0.12) 0%,transparent 70%);filter:blur(60px);"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-24 flex flex-col items-center">
+
+      <!-- eyebrow -->
+      <p class="reveal font-inter text-xs font-semibold tracking-[0.20em] uppercase mb-6" style="color:#b0006d;">— Зв'яжіться зі мною</p>
+
+      <!-- heading -->
+      <h2 class="reveal font-grotesk text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight text-center mb-4 max-w-2xl">
+        Готові до створення<br class="hidden sm:block"/> власного сайту?
+      </h2>
+
+      <!-- subheading -->
+      <p class="reveal font-inter text-base sm:text-lg leading-relaxed text-center max-w-xl mb-12" style="color:#9ca3af;">
+        Залиште заявку, і ми обговоримо ваш проєкт за 15 хвилин. Ви отримаєте професійний розбір ніші та розуміння, яким має бути ваш ідеальний сайт.
+      </p>
+
+      <!-- form card -->
+      <div class="reveal w-full max-w-lg rounded-2xl px-8 sm:px-10 py-10 flex flex-col gap-5"
+           style="background:#0f0f0f;border:1px solid rgba(176,0,109,0.30);box-shadow:0 0 80px rgba(176,0,109,0.08),0 1px 0 rgba(255,255,255,0.04) inset;">
+
+        <!-- name -->
+        <div class="flex flex-col gap-2">
+          <label class="font-inter text-xs font-medium tracking-wide uppercase" style="color:#6b7280;">Ваше ім'я</label>
+          <input
+            id="contact-name"
+            type="text"
+            placeholder="Наприклад, Олена"
+            class="w-full font-inter text-sm text-white rounded-lg px-4 py-3.5 outline-none transition-all duration-200 placeholder-gray-600"
+            style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);"
+            onfocus="this.style.borderColor='rgba(176,0,109,0.55)';this.style.boxShadow='0 0 0 3px rgba(176,0,109,0.10)';"
+            onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none';"
+          />
+        </div>
+
+        <!-- niche -->
+        <div class="flex flex-col gap-2">
+          <label class="font-inter text-xs font-medium tracking-wide uppercase" style="color:#6b7280;">Ваша ніша / тематика</label>
+          <input
+            id="contact-niche"
+            type="text"
+            placeholder="Наприклад, стоматологія, онлайн-курси..."
+            class="w-full font-inter text-sm text-white rounded-lg px-4 py-3.5 outline-none transition-all duration-200 placeholder-gray-600"
+            style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);"
+            onfocus="this.style.borderColor='rgba(176,0,109,0.55)';this.style.boxShadow='0 0 0 3px rgba(176,0,109,0.10)';"
+            onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none';"
+          />
+        </div>
+
+        <!-- contact -->
+        <div class="flex flex-col gap-2">
+          <label class="font-inter text-xs font-medium tracking-wide uppercase" style="color:#6b7280;">Ваш Telegram або номер телефону</label>
+          <input
+            id="contact-tg"
+            type="text"
+            placeholder="@username або +380..."
+            class="w-full font-inter text-sm text-white rounded-lg px-4 py-3.5 outline-none transition-all duration-200 placeholder-gray-600"
+            style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);"
+            onfocus="this.style.borderColor='rgba(176,0,109,0.55)';this.style.boxShadow='0 0 0 3px rgba(176,0,109,0.10)';"
+            onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none';"
+          />
+        </div>
+
+        <!-- submit -->
+        <button
+          id="contact-submit"
+          type="button"
+          onclick="handleContactSubmit()"
+          class="btn-primary relative overflow-hidden w-full font-inter text-sm font-semibold py-4 rounded-lg text-white mt-2 transition-all duration-200 flex items-center justify-center gap-2"
+          style="background:#b0006d;box-shadow:0 0 32px rgba(176,0,109,0.40);">
+          Обговорити проєкт
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+          </svg>
+        </button>
+
+        <!-- success message (hidden) -->
+        <div id="contact-success" class="hidden flex flex-col items-center gap-2 py-2 text-center">
+          <svg class="w-8 h-8" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p class="font-grotesk text-base font-bold text-white">Заявку отримано!</p>
+          <p class="font-inter text-sm" style="color:#9ca3af;">Напишу вам протягом кількох годин.</p>
+        </div>
+
+        <!-- bonus -->
+        <div class="rounded-xl px-5 py-4 flex gap-3 items-start mt-1"
+             style="background:rgba(176,0,109,0.08);border:1px solid rgba(176,0,109,0.20);">
+          <span class="text-lg leading-none mt-0.5 shrink-0">🔥</span>
+          <p class="font-inter text-sm leading-relaxed" style="color:#d1d5db;">
+            <strong class="text-white">Бонус:</strong> Після нашого зідзвону я особисто створю для вас концепт першого екрану вашого майбутнього сайту — безкоштовно та без жодних зобов'язань.
+          </p>
+        </div>
+
+        <!-- privacy -->
+        <p class="font-inter text-xs text-center mt-1" style="color:#4b5563;">
+          🔒 Я гарантую конфіденційність ваших даних.
+        </p>
+
+      </div><!-- /form card -->
+    </div>
+  </section>
+
+  <script>
+    // ── Google Sheets webhook URL (замінити після деплою Apps Script) ──
+    const SHEETS_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+
+    function handleContactSubmit() {
+      const nameEl  = document.getElementById('contact-name');
+      const nicheEl = document.getElementById('contact-niche');
+      const tgEl    = document.getElementById('contact-tg');
+      const name    = nameEl.value.trim();
+      const niche   = nicheEl ? nicheEl.value.trim() : '';
+      const contact = tgEl.value.trim();
+
+      // validate required
+      let valid = true;
+      [nameEl, tgEl].forEach(el => {
+        if (!el.value.trim()) {
+          el.style.borderColor = 'rgba(176,0,109,0.8)';
+          el.style.boxShadow   = '0 0 0 3px rgba(176,0,109,0.15)';
+          valid = false;
+        }
+      });
+      if (!valid) return;
+
+      const btn = document.getElementById('contact-submit');
+      btn.disabled = true;
+      btn.textContent = 'Відправляємо…';
+      btn.style.opacity = '0.7';
+
+      const payload = { name, niche, contact,
+        timestamp: new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' }) };
+
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(() => showSuccess())
+      .catch(() => showSuccess()); // no-cors завжди дає opaque response — показуємо успіх
+    }
+
+    function showSuccess() {
+      const btn = document.getElementById('contact-submit');
+      btn.classList.add('hidden');
+      const ok = document.getElementById('contact-success');
+      ok.classList.remove('hidden');
+      ok.classList.add('flex');
+    }
+  </script>
+
+  <script>
+    // ripple on btn-primary / btn-outline click
+    document.querySelectorAll('.btn-primary, .btn-outline').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top  - size / 2;
+        const ring = document.createElement('span');
+        ring.className = 'ripple-ring';
+        ring.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+        this.appendChild(ring);
+        ring.addEventListener('animationend', () => ring.remove());
+      });
+    });
+
+    // timeline SVG line — match height of step container
+    (function() {
+      const wrapper = document.querySelector('#process .relative');
+      const svg = wrapper ? wrapper.querySelector('svg') : null;
+      if (!svg || !wrapper) return;
+      const resize = () => { svg.style.height = wrapper.offsetHeight + 'px'; };
+      resize();
+      window.addEventListener('resize', resize);
+    })();
+
+    // 3D flip cards — toggle on click for touch devices
+    document.querySelectorAll('.flip-wrapper').forEach(card => {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('a')) return; // let browser follow href
+        if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+          this.classList.toggle('flipped');
+        }
+      });
+    });
+
+    // IntersectionObserver scroll-reveal for .reveal elements
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          // stagger siblings inside same parent
+          const siblings = entry.target.parentElement.querySelectorAll('.reveal:not(.visible)');
+          siblings.forEach((el, idx) => {
+            setTimeout(() => el.classList.add('visible'), idx * 90);
+          });
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────────── -->
+  <footer style="background:#0a0a0a;border-top:1px solid rgba(176,0,109,0.18);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 pt-14 pb-10">
+
+      <!-- top row -->
+      <div class="flex flex-col items-center sm:flex-row sm:items-start sm:justify-between gap-10 mb-12">
+
+        <!-- brand -->
+        <div class="flex flex-col items-center sm:items-start gap-3">
+          <a href="#hero" class="font-grotesk text-2xl font-extrabold text-white tracking-tight hover:opacity-80 transition-opacity">
+            Любов <span style="color:#b0006d;">Скиба</span>
+          </a>
+          <p class="font-inter text-sm text-center sm:text-left max-w-xs" style="color:#6b7280;">
+            Розробник сайтів, які продають. Від концепції до стабільного запуску.
+          </p>
+        </div>
+
+        <!-- nav -->
+        <nav class="flex flex-col items-center sm:items-start gap-3">
+          <p class="font-inter text-xs font-semibold tracking-[0.16em] uppercase mb-1" style="color:#b0006d;">Навігація</p>
+          <a href="#price"     class="font-inter text-sm transition-colors duration-200" style="color:#9ca3af;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#9ca3af'">Послуги та Ціни</a>
+          <a href="#portfolio" class="font-inter text-sm transition-colors duration-200" style="color:#9ca3af;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#9ca3af'">Портфоліо</a>
+          <a href="#about"     class="font-inter text-sm transition-colors duration-200" style="color:#9ca3af;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#9ca3af'">Про мене</a>
+          <a href="#process"   class="font-inter text-sm transition-colors duration-200" style="color:#9ca3af;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#9ca3af'">Процес</a>
+          <a href="#faq"       class="font-inter text-sm transition-colors duration-200" style="color:#9ca3af;" onmouseover="this.style.color='#ffffff'" onmouseout="this.style.color='#9ca3af'">Запитання</a>
+        </nav>
+
+        <!-- socials -->
+        <div class="flex flex-col items-center sm:items-start gap-3">
+          <p class="font-inter text-xs font-semibold tracking-[0.16em] uppercase mb-1" style="color:#b0006d;">Соцмережі</p>
+          <div class="flex items-center gap-4">
+
+            <!-- Telegram -->
+            <a href="#" aria-label="Telegram"
+               class="social-icon w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200"
+               style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"
+               onmouseover="this.style.background='rgba(176,0,109,0.18)';this.style.borderColor='rgba(176,0,109,0.50)';"
+               onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.borderColor='rgba(255,255,255,0.08)';">
+              <svg class="w-5 h-5" style="color:#9ca3af;" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+              </svg>
+            </a>
+
+            <!-- Instagram -->
+            <a href="#" aria-label="Instagram"
+               class="social-icon w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-200"
+               style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);"
+               onmouseover="this.style.background='rgba(176,0,109,0.18)';this.style.borderColor='rgba(176,0,109,0.50)';"
+               onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.borderColor='rgba(255,255,255,0.08)';">
+              <svg class="w-5 h-5" style="color:#9ca3af;" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+              </svg>
+            </a>
+
+          </div>
+        </div>
+      </div><!-- /top row -->
+
+      <!-- divider -->
+      <div class="w-full h-px mb-8" style="background:rgba(255,255,255,0.06);"></div>
+
+      <!-- bottom row -->
+      <div class="flex flex-col items-center sm:flex-row sm:justify-between gap-4">
+
+        <!-- copyright -->
+        <p class="font-inter text-xs text-center sm:text-left" style="color:#4b5563;">
+          © 2026 Любов Скиба. Всі права захищені.
+        </p>
+
+        <!-- legal links -->
+        <div class="flex items-center gap-5">
+          <a href="#" class="font-inter text-xs transition-colors duration-200" style="color:#4b5563;"
+             onmouseover="this.style.color='#9ca3af'" onmouseout="this.style.color='#4b5563'">
+            Політика конфіденційності
+          </a>
+          <span style="color:#2d2d2d;">|</span>
+          <a href="#" class="font-inter text-xs transition-colors duration-200" style="color:#4b5563;"
+             onmouseover="this.style.color='#9ca3af'" onmouseout="this.style.color='#4b5563'">
+            Угода користувача
+          </a>
+        </div>
+
+      </div><!-- /bottom row -->
+    </div>
+  </footer>
+
+  <!-- ─── MOBILE MENU (drawer) ────────────────────────────────────── -->
+  <div id="mobile-menu-overlay"
+       class="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm hidden"
+       onclick="closeMobileMenu()"></div>
+
+  <div id="mobile-menu"
+       class="fixed top-0 right-0 h-full w-72 z-50 flex flex-col overflow-y-auto transition-transform duration-300 translate-x-full"
+       style="background:#0f0f0f;border-left:1px solid rgba(176,0,109,0.25);">
+
+    <!-- header -->
+    <div class="flex items-center justify-between px-6 h-16 border-b" style="border-color:rgba(255,255,255,0.07);">
+      <span class="font-grotesk text-lg font-bold text-white">Меню</span>
+      <button onclick="closeMobileMenu()" class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-white transition-colors" style="background:rgba(255,255,255,0.05);">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- nav links -->
+    <nav class="flex flex-col px-6 py-6 gap-1">
+      <a href="#price"     onclick="closeMobileMenu()" class="font-inter text-base font-medium text-gray-300 px-3 py-3 rounded-lg hover:bg-white/5 hover:text-white transition-all">Послуги та Ціни</a>
+      <a href="#portfolio" onclick="closeMobileMenu()" class="font-inter text-base font-medium text-gray-300 px-3 py-3 rounded-lg hover:bg-white/5 hover:text-white transition-all">Портфоліо</a>
+      <a href="#about"     onclick="closeMobileMenu()" class="font-inter text-base font-medium text-gray-300 px-3 py-3 rounded-lg hover:bg-white/5 hover:text-white transition-all">Про мене</a>
+      <a href="#process"   onclick="closeMobileMenu()" class="font-inter text-base font-medium text-gray-300 px-3 py-3 rounded-lg hover:bg-white/5 hover:text-white transition-all">Процес</a>
+      <a href="#faq"       onclick="closeMobileMenu()" class="font-inter text-base font-medium text-gray-300 px-3 py-3 rounded-lg hover:bg-white/5 hover:text-white transition-all">Запитання</a>
+    </nav>
+
+    <!-- socials -->
+    <div class="flex items-center gap-3 px-6 pt-2 pb-4 border-t" style="border-color:rgba(255,255,255,0.07);">
+      <a href="#" aria-label="Telegram" class="w-9 h-9 rounded-lg flex items-center justify-center transition-all" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.30);">
+        <svg class="w-4 h-4" style="color:#b0006d;" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg flex items-center justify-center transition-all" style="background:rgba(176,0,109,0.12);border:1px solid rgba(176,0,109,0.30);">
+        <svg class="w-4 h-4" style="color:#b0006d;" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+    </div>
+
+    <!-- CTA -->
+    <div class="px-6 pb-8 mt-auto">
+      <a href="#contact" onclick="closeMobileMenu()"
+         class="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-inter text-sm font-semibold text-white transition-all"
+         style="background:#b0006d;box-shadow:0 0 20px rgba(176,0,109,0.35);">
+        Обговорити проєкт
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ─── SCROLL TO TOP (all devices) ────────────────────────────── -->
+  <button id="scroll-top"
+          onclick="window.scrollTo({top:0,behavior:'smooth'})"
+          aria-label="Вгору"
+          class="fixed bottom-6 left-4 z-50 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 pointer-events-none translate-y-2"
+          style="background:#1a1a1a;border:1px solid rgba(176,0,109,0.40);box-shadow:0 0 16px rgba(176,0,109,0.20);"
+          onmouseover="this.style.background='rgba(176,0,109,0.15)';this.style.borderColor='rgba(176,0,109,0.70)';"
+          onmouseout="this.style.background='#1a1a1a';this.style.borderColor='rgba(176,0,109,0.40)';">
+    <svg class="w-4 h-4" style="color:#b0006d;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/>
+    </svg>
+  </button>
+
+  <script>
+    (function() {
+      const btn = document.getElementById('scroll-top');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+          btn.classList.remove('opacity-0','pointer-events-none','translate-y-2');
+          btn.classList.add('opacity-100','translate-y-0');
+        } else {
+          btn.classList.add('opacity-0','pointer-events-none','translate-y-2');
+          btn.classList.remove('opacity-100','translate-y-0');
+        }
+      }, { passive: true });
+    })();
+  </script>
+
+  <!-- ─── FLOATING ACTION BUTTONS (mobile/tablet only) ────────────── -->
+  <div class="fixed bottom-6 right-4 z-50 flex flex-col gap-3 lg:hidden">
+
+    <!-- Phone -->
+    <a href="tel:+380666027243" aria-label="Зателефонувати"
+       class="fab-btn fab-pulse rounded-full flex items-center justify-center shadow-lg transition-all duration-200 active:scale-95"
+       style="width:52px;height:52px;background:#b0006d;">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.338c0-1.243.596-2.387 1.605-3.102l.738-.527a1.875 1.875 0 012.463.32l1.16 1.451c.51.638.51 1.544 0 2.183L7.32 7.79c-.24.3-.276.713-.09 1.05.828 1.51 1.93 2.849 3.267 3.893.362.28.868.255 1.207-.057l1.058-.966a1.875 1.875 0 012.557.16l1.31 1.453a1.875 1.875 0 01-.175 2.647l-.665.598c-.875.787-2.09 1.088-3.234.797a17.255 17.255 0 01-9.847-8.977 3.375 3.375 0 01.49-3.524z"/>
+      </svg>
+    </a>
+
+    <!-- Message / Telegram -->
+    <a href="https://t.me/+380666027243" target="_blank" rel="noopener" aria-label="Написати в Telegram"
+       class="fab-btn w-13 h-13 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 active:scale-95"
+       style="width:52px;height:52px;background:#1a1a1a;border:2px solid #b0006d;box-shadow:0 0 16px rgba(176,0,109,0.30);">
+      <svg class="w-5 h-5" style="color:#b0006d;" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+      </svg>
+    </a>
+
+  </div>
+
+  <script>
+    function openMobileMenu() {
+      document.getElementById('mobile-menu').classList.remove('translate-x-full');
+      document.getElementById('mobile-menu-overlay').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-menu').classList.add('translate-x-full');
+      document.getElementById('mobile-menu-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+
+</body>
+</html>
