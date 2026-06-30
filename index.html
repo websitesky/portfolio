@@ -319,10 +319,24 @@
     .bullets-active .bullet-item:nth-child(2) { animation: bulletFly 0.5s ease-out 0.7s forwards; }
     .bullets-active .bullet-item:nth-child(3) { animation: bulletFly 0.5s ease-out 1.2s forwards; }
 
-    /* solution cards border-glow on hover */
+    /* solution cards entrance + hover */
+    @keyframes cardRise {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
     .solution-card {
+      opacity:0;
       transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
+    .solution-card.visible {
+      animation: cardRise 0.55s ease-out forwards;
+    }
+    .solution-card.visible:nth-child(1) { animation-delay: 0.00s; }
+    .solution-card.visible:nth-child(2) { animation-delay: 0.10s; }
+    .solution-card.visible:nth-child(3) { animation-delay: 0.20s; }
+    .solution-card.visible:nth-child(4) { animation-delay: 0.30s; }
+    .solution-card.visible:nth-child(5) { animation-delay: 0.40s; }
+    .solution-card.visible:nth-child(6) { animation-delay: 0.50s; }
     .solution-card:hover {
       border-color: rgba(176,0,109,0.55) !important;
       box-shadow: 0 0 0 1px rgba(176,0,109,0.20), 0 8px 32px rgba(176,0,109,0.12);
@@ -693,7 +707,7 @@
   </section>
 
   <!-- ─── CTA 1 ──────────────────────────────────────────────────── -->
-  <section style="background:#ffffff;" class="relative overflow-hidden">
+  <section style="background:#0a0a0a;" class="relative overflow-hidden">
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-14 flex justify-center">
       <div class="reveal w-full max-w-2xl rounded-2xl px-8 sm:px-12 py-10 flex flex-col sm:flex-row sm:items-center gap-7"
            style="background:#111111;border:1px solid rgba(176,0,109,0.30);box-shadow:0 8px 40px rgba(0,0,0,0.18);">
@@ -730,7 +744,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
         <!-- 1: Довіра -->
-        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+        <div class="solution-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
              style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
           <!-- dot accent top-right -->
           <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
@@ -748,7 +762,7 @@
         </div>
 
         <!-- 2: Заявка в 1 клік -->
-        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+        <div class="solution-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
              style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
           <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
           <div class="mb-5">
@@ -763,7 +777,7 @@
         </div>
 
         <!-- 3: Адаптивність -->
-        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+        <div class="solution-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
              style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
           <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
           <div class="mb-5">
@@ -778,7 +792,7 @@
         </div>
 
         <!-- 4: Швидкість -->
-        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+        <div class="solution-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
              style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
           <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
           <div class="mb-5">
@@ -793,7 +807,7 @@
         </div>
 
         <!-- 5: Карта і локація -->
-        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+        <div class="solution-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
              style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
           <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
           <div class="mb-5">
@@ -809,7 +823,7 @@
         </div>
 
         <!-- 6: SEO під локацію -->
-        <div class="solution-card reveal group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
+        <div class="solution-card group relative rounded-xl p-6 overflow-hidden transition-all duration-300"
              style="background:#1e1e1e; border:1px solid rgba(255,255,255,0.07);">
           <div class="absolute top-4 right-4 w-2 h-2 rounded-full" style="background:#b0006d; box-shadow:0 0 6px 2px rgba(176,0,109,0.5);"></div>
           <div class="mb-5">
@@ -1000,7 +1014,7 @@
   </section>
 
   <!-- ─── BLOCK 4.5: Точна вартість ──────────────────────────────── -->
-  <section style="background:#ffffff;" class="relative overflow-hidden">
+  <section style="background:#0a0a0a;" class="relative overflow-hidden">
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-16 flex justify-center">
 
       <!-- container -->
@@ -2116,19 +2130,29 @@
       lastScrollPos = 0;
     };
 
-    // video bullets fly-in via IntersectionObserver
+    // solution cards stagger entrance
+    (function() {
+      const cards = document.querySelectorAll('.solution-card');
+      if (!cards.length) return;
+      const sIO = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); sIO.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      cards.forEach(c => sIO.observe(c));
+    })();
+
+    // video bullets fly-in — works on all devices
     const bulletsEl = document.getElementById('video-bullets');
     if (bulletsEl) {
+      function activateBullets() { bulletsEl.classList.add('bullets-active'); }
+      // fallback: if already in viewport on load (hero is top of page)
+      setTimeout(activateBullets, 400);
       const bullIO = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
-          bulletsEl.classList.add('bullets-active');
-          bullIO.disconnect();
-        }
-      }, { threshold: 0.4 });
+        if (entries[0].isIntersecting) { activateBullets(); bullIO.disconnect(); }
+      }, { threshold: 0.05 });
       bullIO.observe(bulletsEl);
     }
 
-    // exit-intent popup
+    // exit-intent popup — desktop (mouseleave) + mobile (visibilitychange/pagehide)
     (function() {
       let shown = false;
       function formFilled() {
@@ -2136,12 +2160,22 @@
         const t = document.getElementById('contact-tg');
         return (n && n.value.trim()) || (t && t.value.trim());
       }
-      document.addEventListener('mouseleave', function(e) {
-        if (e.clientY < 10 && !shown && !formFilled()) {
+      function tryShow() {
+        if (!shown && !formFilled()) {
           shown = true;
           document.getElementById('exit-popup').classList.add('show');
         }
+      }
+      // desktop: cursor leaves window upward
+      document.addEventListener('mouseleave', function(e) {
+        if (e.clientY < 10) tryShow();
       });
+      // mobile: tab switch / home button / address bar tap
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'hidden') tryShow();
+      });
+      // iOS Safari fallback
+      window.addEventListener('pagehide', function() { tryShow(); });
     })();
   </script>
 
