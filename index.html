@@ -327,11 +327,7 @@
     .bullets-active .bullet-item:nth-child(2) { animation: bulletLaunch 0.65s cubic-bezier(0.22,1,0.36,1) 0.75s forwards; }
     .bullets-active .bullet-item:nth-child(3) { animation: bulletLaunch 0.65s cubic-bezier(0.22,1,0.36,1) 1.25s forwards; }
 
-    /* flip-card hint pulse border */
-    @keyframes hintPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(176,0,109,0); border-color: rgba(176,0,109,0.35); }
-      50%       { box-shadow: 0 0 0 4px rgba(176,0,109,0.22); border-color: rgba(176,0,109,0.80); }
-    }
+    /* flip-card hint — styled as btn-primary */
     .flip-hint {
       display: inline-flex;
       align-items: center;
@@ -340,10 +336,12 @@
       font-size: 0.85rem;
       font-weight: 600;
       color: #ffffff;
-      border: 1px solid rgba(176,0,109,0.35);
-      border-radius: 6px;
-      padding: 3px 10px;
-      animation: hintPulse 2s ease-in-out infinite;
+      background: linear-gradient(135deg, #d4007f 0%, #b0006d 55%, #7a0050 100%);
+      border: none;
+      border-radius: 12px;
+      padding: 10px 20px;
+      animation: btn-glow 2.4s ease-in-out infinite;
+      cursor: default;
     }
 
     /* solution cards entrance + hover */
@@ -936,7 +934,7 @@
               </div>
               <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-xl font-inter font-semibold text-sm text-white py-3 no-underline"
                  style="text-decoration:none;">
-                Замовити Landing
+                Обговорити Landing
               </a>
             </div>
           </div>
@@ -984,7 +982,7 @@
               </div>
               <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-xl font-inter font-semibold text-sm text-white py-3 no-underline"
                  style="text-decoration:none;">
-                Замовити сайт
+                Обговорити сайт
               </a>
             </div>
           </div>
@@ -1030,7 +1028,7 @@
               </div>
               <a href="#contact" class="relative z-10 btn-primary inline-flex items-center justify-center gap-2 rounded-xl font-inter font-semibold text-sm text-white py-3 no-underline"
                  style="text-decoration:none;">
-                Замовити магазин
+                Обговорити магазин
               </a>
             </div>
           </div>
