@@ -1697,11 +1697,12 @@
 
         <!-- name -->
         <div class="flex flex-col gap-2">
-          <label class="font-inter text-xs font-medium tracking-wide uppercase" style="color:#6b7280;">Ваше ім'я</label>
+          <label class="font-inter text-xs font-bold tracking-wide uppercase" style="color:#374151;">Ваше ім'я <span style="color:#b0006d;">*</span></label>
           <input
             id="contact-name"
             type="text"
             placeholder="Наприклад, Олена"
+            required
             class="w-full font-inter text-sm rounded-lg px-4 py-3.5 outline-none transition-all duration-200"
             style="color:#111111;background:#f5f5f5;border:1px solid rgba(0,0,0,0.10);"
             onfocus="this.style.borderColor='rgba(176,0,109,0.55)';this.style.boxShadow='0 0 0 3px rgba(176,0,109,0.10)';"
@@ -1711,11 +1712,12 @@
 
         <!-- niche -->
         <div class="flex flex-col gap-2">
-          <label class="font-inter text-xs font-medium tracking-wide uppercase" style="color:#6b7280;">Ваша ніша / тематика</label>
+          <label class="font-inter text-xs font-bold tracking-wide uppercase" style="color:#374151;">Ваша ніша / тематика <span style="color:#b0006d;">*</span></label>
           <input
             id="contact-niche"
             type="text"
             placeholder="Наприклад, стоматологія, онлайн-курси..."
+            required
             class="w-full font-inter text-sm rounded-lg px-4 py-3.5 outline-none transition-all duration-200"
             style="color:#111111;background:#f5f5f5;border:1px solid rgba(0,0,0,0.10);"
             onfocus="this.style.borderColor='rgba(176,0,109,0.55)';this.style.boxShadow='0 0 0 3px rgba(176,0,109,0.10)';"
@@ -1725,16 +1727,31 @@
 
         <!-- contact -->
         <div class="flex flex-col gap-2">
-          <label class="font-inter text-xs font-medium tracking-wide uppercase" style="color:#6b7280;">Ваш Telegram або номер телефону</label>
+          <label class="font-inter text-xs font-bold tracking-wide uppercase" style="color:#374151;">Ваш Telegram або номер телефону <span style="color:#b0006d;">*</span></label>
           <input
             id="contact-tg"
             type="text"
             placeholder="@username або +380..."
+            required
             class="w-full font-inter text-sm rounded-lg px-4 py-3.5 outline-none transition-all duration-200"
             style="color:#111111;background:#f5f5f5;border:1px solid rgba(0,0,0,0.10);"
             onfocus="this.style.borderColor='rgba(176,0,109,0.55)';this.style.boxShadow='0 0 0 3px rgba(176,0,109,0.10)';"
             onblur="this.style.borderColor='rgba(0,0,0,0.10)';this.style.boxShadow='none';"
           />
+        </div>
+
+        <!-- comment -->
+        <div class="flex flex-col gap-2">
+          <label class="font-inter text-xs font-bold tracking-wide uppercase" style="color:#374151;">Коментар</label>
+          <textarea
+            id="contact-comment"
+            placeholder="Розкажіть про ваш проєкт або побажання..."
+            rows="3"
+            class="w-full font-inter text-sm rounded-lg px-4 py-3.5 outline-none transition-all duration-200 resize-none"
+            style="color:#111111;background:#f5f5f5;border:1px solid rgba(0,0,0,0.10);"
+            onfocus="this.style.borderColor='rgba(176,0,109,0.55)';this.style.boxShadow='0 0 0 3px rgba(176,0,109,0.10)';"
+            onblur="this.style.borderColor='rgba(0,0,0,0.10)';this.style.boxShadow='none';"
+          ></textarea>
         </div>
 
         <!-- submit -->
@@ -1782,16 +1799,18 @@
     const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzg4F2YmneP72yzf8Y4KA4zMsT4FjmZiqdMigHHBI0IImFxQOfS2BYN7wk2bx4ADL6x/exec';
 
     function handleContactSubmit() {
-      const nameEl  = document.getElementById('contact-name');
-      const nicheEl = document.getElementById('contact-niche');
-      const tgEl    = document.getElementById('contact-tg');
+      const nameEl    = document.getElementById('contact-name');
+      const nicheEl   = document.getElementById('contact-niche');
+      const tgEl      = document.getElementById('contact-tg');
+      const commentEl = document.getElementById('contact-comment');
       const name    = nameEl.value.trim();
       const niche   = nicheEl ? nicheEl.value.trim() : '';
       const contact = tgEl.value.trim();
+      const comment = commentEl ? commentEl.value.trim() : '';
 
       // validate required
       let valid = true;
-      [nameEl, tgEl].forEach(el => {
+      [nameEl, nicheEl, tgEl].forEach(el => {
         if (!el.value.trim()) {
           el.style.borderColor = 'rgba(176,0,109,0.8)';
           el.style.boxShadow   = '0 0 0 3px rgba(176,0,109,0.15)';
@@ -1805,7 +1824,7 @@
       btn.textContent = 'Відправляємо…';
       btn.style.opacity = '0.7';
 
-      const payload = { name, niche, contact,
+      const payload = { name, niche, contact, comment,
         timestamp: new Date().toLocaleString('uk-UA', { timeZone: 'Europe/Kyiv' }) };
 
       fetch(SHEETS_URL, {
